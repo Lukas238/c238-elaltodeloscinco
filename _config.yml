@@ -1,0 +1,47 @@
+# Jekyll Configuration - El Alto de los Cinco
+# Site settings
+title: El Alto de los Cinco
+description: Una oportunidad única de inversión en tierra - Villa General Belgrano, Córdoba
+baseurl: "c238-elaltodeloscinco" # Dejalo vacío si usarás username.github.io/repo-name
+url: "https://elaltodeloscinco.com.ar/" # URL completo del sitio cuando esté deployado
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+sass:
+  style: compressed
+  sass_dir: _sass
+
+# Collections (si las necesitamos después)
+collections:
+  lotes:
+    output: true
+    permalink: /lotes/:name
+
+# Exclude from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+# Site metadata
+author: El Alto de los Cinco
+email: contacto@example.com
+phone: "+54 9 XXX XXX-XXXX"
+
+# Social (opcional)
+# facebook: ""
+# instagram: ""
+
+# Analytics (agregar después si es necesario)
+# google_analytics: UA-XXXXXXXX-X

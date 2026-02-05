@@ -1,0 +1,43 @@
+<header class="site-header">
+    <nav class="nav-container">
+        <div class="nav-logo">
+            <a href="{{ '/' | relative_url }}" class="logo-link">
+                <img src="{{ '/assets/images/logo_el_alto_de_los_cinco_icon.jpg' | relative_url }}" alt="El Alto de los Cinco" class="logo-image">
+                <span class="logo-text">El Alto de los Cinco</span>
+            </a>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <ul class="nav-menu desktop-only">
+            <li><a href="#vision">Visión</a></li>
+            <li><a href="#propuesta">Propuesta</a></li>
+            <li><a href="#propiedad">Los Lotes</a></li>
+            <li><a href="#ubicacion">Ubicación</a></li>
+            <li><a href="#planos">Planos</a></li>
+            <li><a href="#legal-tecnico">Legal y Técnico</a></li>
+        </ul>
+        
+        <a href="#contacto" class="btn-primary desktop-only">Consultanos</a>
+        
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-menu-toggle" aria-label="Abrir menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+    
+    <!-- Mobile Menu (Hidden by default) -->
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" aria-label="Cerrar menú">✕</button>
+        <ul class="mobile-nav-list">
+            <li><a href="#vision">Visión</a></li>
+            <li><a href="#propuesta">Propuesta</a></li>
+            <li><a href="#propiedad">Los Lotes</a></li>
+            <li><a href="#ubicacion">Ubicación</a></li>
+            <li><a href="#planos">Planos</a></li>
+            <li><a href="#legal-tecnico">Legal & Técnico</a></li>
+        </ul>
+        <a href="#contacto" class="btn-primary btn-full-width">Consultar Ahora</a>
+    </div>
+</header>

@@ -1,0 +1,16 @@
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7cb342;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#558b2f;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#grad1)"/>
+  <circle cx="600" cy="400" r="150" fill="#689f38" opacity="0.3"/>
+  <circle cx="300" cy="200" r="80" fill="#558b2f" opacity="0.4"/>
+  <circle cx="900" cy="600" r="120" fill="#558b2f" opacity="0.4"/>
+  <path d="M 0 400 Q 300 350, 600 420 T 1200 380" stroke="#8bc34a" stroke-width="8" fill="none" opacity="0.5"/>
+  <path d="M 0 500 Q 400 480, 800 520 T 1200 500" stroke="#7cb342" stroke-width="6" fill="none" opacity="0.4"/>
+  <text x="600" y="380" font-family="Arial, sans-serif" font-size="48" fill="white" text-anchor="middle" font-weight="bold">VISTA SATELITAL</text>
+  <text x="600" y="430" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle" opacity="0.9">(Mockup temporal - Antes)</text>
+</svg>
