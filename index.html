@@ -8,12 +8,8 @@ description: Una oportunidad única de inversión en tierra con régimen de prop
 <!-- COMING SOON PAGE - Only in Production -->
 <section class="coming-soon-section">
     <div class="coming-soon-container">
-        <div class="coming-soon-content">
-            <img src="{{ '/assets/logo_el_alto_de_los_cinco.jpg' | relative_url }}" alt="El Alto de los Cinco" class="coming-soon-logo">
-            <h1 class="coming-soon-title">Próximamente</h1>
-            <p class="coming-soon-subtitle">Estamos preparando algo especial</p>
-            <p class="coming-soon-text">Un proyecto de desarrollo inmobiliario único en Villa General Belgrano, Córdoba</p>
-        </div>
+        <img src="{{ '/assets/logo_el_alto_de_los_cinco.jpg' | relative_url }}" alt="El Alto de los Cinco" class="coming-soon-logo">
+        <h1 class="coming-soon-title">Próximamente</h1>
     </div>
     
     <style>
@@ -22,40 +18,27 @@ description: Una oportunidad única de inversión en tierra con régimen de prop
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #2C2A29 0%, #5A6B5D 100%);
+            background: #2C2A29;
             padding: 2rem;
         }
         .coming-soon-container {
-            max-width: 600px;
             text-align: center;
         }
         .coming-soon-logo {
-            max-width: 200px;
+            max-width: 250px;
             margin-bottom: 2rem;
-            border-radius: 50%;
         }
         .coming-soon-title {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: #F5F3F0;
-            margin-bottom: 1rem;
             font-family: 'Playfair Display', serif;
         }
-        .coming-soon-subtitle {
-            font-size: 1.5rem;
-            color: #B89968;
-            margin-bottom: 1.5rem;
-        }
-        .coming-soon-text {
-            font-size: 1.1rem;
-            color: #F5F3F0;
-            line-height: 1.6;
-        }
         @media (max-width: 768px) {
+            .coming-soon-logo {
+                max-width: 200px;
+            }
             .coming-soon-title {
                 font-size: 2rem;
-            }
-            .coming-soon-subtitle {
-                font-size: 1.2rem;
             }
         }
     </style>
