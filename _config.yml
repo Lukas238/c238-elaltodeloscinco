@@ -2,8 +2,8 @@
 # Site settings
 title: El Alto de los Cinco
 description: Una oportunidad única de inversión en tierra - Villa General Belgrano, Córdoba
-baseurl: "c238-elaltodeloscinco" # Dejalo vacío si usarás username.github.io/repo-name
-url: "https://elaltodeloscinco.com.ar/" # URL completo del sitio cuando esté deployado
+baseurl: "" # Vacío para dominio personalizado
+url: "https://elaltodeloscinco.com.ar" # URL completo del sitio cuando esté deployado
 
 # Build settings
 markdown: kramdown

@@ -306,20 +306,12 @@ description: Una oportunidad única de inversión en tierra con régimen de prop
         
         <!-- Mapa y Detalles -->
         <div class="ubicacion-grid">
-            <!-- Google Maps -->
+            <!-- OpenStreetMap con Leaflet -->
             <div class="ubicacion-map">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d6800!2d-64.640228!3d-31.961637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f9!3m2!1m1!2zMzHCsDU3JzQxLjkiUyA2NMKwMzgnMjQuOCJX!5e1!3m2!1ses-419!2sar!4v1707012000000!5m2!1ses-419!2sar"
-                    width="100%" 
-                    height="600" 
-                    style="border:0; border-radius: 4px;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
+                <div id="location-map" style="height: 600px; border-radius: 4px;"></div>
                 <p class="map-link">
-                    <a href="https://maps.app.goo.gl/efwNXJPVZKT6CV7Z8" target="_blank" rel="noopener">
-                        📍 Ver ubicación exacta en Google Maps
+                    <a href="https://www.openstreetmap.org/?mlat=-31.961639&mlon=-64.640222#map=16/-31.961639/-64.640222" target="_blank" rel="noopener">
+                        📍 Ver en OpenStreetMap
                     </a>
                 </p>
             </div>
@@ -377,29 +369,24 @@ description: Una oportunidad única de inversión en tierra con régimen de prop
         
         <!-- Planos -->
         <div class="planos-container">
-            <h3 class="planos-title">Planos y Croquis</h3>
+            <p class="lotes-info">Chacras en venta: 120, 121, 122, 123 y 124</p>
             
             <div class="planos-tabs">
-                <button class="plano-tab active" data-plano="subdivision">Lotes en Venta</button>
-                <button class="plano-tab" data-plano="prop-hoz">Propiedad Horizontal Especial</button>
-                <button class="plano-tab" data-plano="croquis">Croquis General</button>
-                <button class="plano-tab" data-plano="lote-total">Lote Total del Emprendimiento</button>
+                <button class="plano-tab active" data-plano="subdivision">Chacras</button>
+                <button class="plano-tab" data-plano="prop-hoz">
+                    <span class="tab-main">Subdivisión</span>
+                    <span class="tab-sub">(Propiedad Horizontal Especial)</span>
+                </button>
+                <button class="plano-tab" data-plano="lote-total">Emprendimiento</button>
             </div>
             
             <div class="plano-viewer">
                 <div class="plano-content active" id="plano-subdivision">
                     <img src="{{ '/assets/images/planos/plano__subdivision_detalle.jpg' | relative_url }}" alt="Plano detallado de lotes en venta">
-                    <p class="plano-caption">Lotes en venta - Detalle con superficies exactas: 1 ha, 7.9 ha, 8.8 ha, 10.2 ha, 10.8 ha, 14.8 ha, 22.4 ha</p>
                 </div>
                 
                 <div class="plano-content" id="plano-prop-hoz">
                     <img src="{{ '/assets/images/planos/plano__prop_hoz__detalle.svg' | relative_url }}" alt="Plano detallado de Propiedad Horizontal Especial">
-                    <p class="plano-caption">Propiedad Horizontal Especial - Subdivisión de lotes individuales inscriptos (1 ha, 7.9 ha, 8.8 ha, 10.2 ha, 10.8 ha, 14.8 ha, 22.4 ha)</p>
-                </div>
-                
-                <div class="plano-content" id="plano-croquis">
-                    <img src="{{ '/assets/images/planos/plano__croquis_ubicacion.svg' | relative_url }}" alt="Croquis de ubicación general">
-                    <p class="plano-caption">Croquis general - Campo en relación a Ruta 210, Río Los Reartes y Villa General Belgrano</p>
                 </div>
                 
                 <div class="plano-content" id="plano-lote-total">
@@ -415,32 +402,16 @@ description: Una oportunidad única de inversión en tierra con régimen de prop
                 <a href="{{ '/assets/images/planos/plano__prop_hoz__detalle.svg' | relative_url }}" download class="btn-secondary">
                     📄 Descargar Prop. Horizontal
                 </a>
-                <a href="{{ '/assets/images/planos/plano__croquis_ubicacion.svg' | relative_url }}" download class="btn-secondary">
-                    📄 Descargar Croquis
-                </a>
             </div>
         </div>
         
-        <!-- Comparador de Imágenes Antes/Después -->
-        <div class="image-comparison-container">
+        <!-- Mapa Interactivo -->
+        <div class="mapa-interactive-container">
             <h3>Vista del Terreno y Lotes</h3>
-            <p class="comparison-subtitle">Desliza para comparar el mapa satelital con el plano de subdivisión</p>
+            <p class="comparison-subtitle">Usa los botones en la esquina superior izquierda para superponer los planos de subdivisión sobre el mapa satelital. Puedes hacer zoom, desplazarte y cambiar entre vista satelital y de calles.</p>
             
-            <!-- Comparador Principal: Mapa limpio vs Subdivisión -->
-            <div class="comparison-wrapper">
-                <img-comparison-slider>
-                    <img slot="first" src="{{ '/assets/images/planos/mapa_y_plano_1.jpg' | relative_url }}" alt="Vista satelital limpia" />
-                    <img slot="second" src="{{ '/assets/images/planos/mapa_y_plano_3.jpg' | relative_url }}" alt="Plano de subdivisión de propiedad horizontal" />
-                </img-comparison-slider>
-            </div>
-            
-            <!-- Comparador Secundario: Parcelas originales vs Subdivisión -->
-            <div class="comparison-wrapper" style="margin-top: 2rem;">
-                <p class="comparison-subtitle">Comparación de parcelas originales vs subdivisión</p>
-                <img-comparison-slider>
-                    <img slot="first" src="{{ '/assets/images/planos/mapa_y_plano_2.jpg' | relative_url }}" alt="Plano con parcelas originales" />
-                    <img slot="second" src="{{ '/assets/images/planos/mapa_y_plano_3.jpg' | relative_url }}" alt="Plano de subdivisión de propiedad horizontal" />
-                </img-comparison-slider>
+            <div class="mapa-embed-wrapper">
+                <div id="interactive-map"></div>
             </div>
         </div>
     </div>

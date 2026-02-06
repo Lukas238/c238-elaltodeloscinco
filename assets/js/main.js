@@ -126,6 +126,228 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     
+    // ==========================================    // MAPA INTERACTIVO CON LEAFLET
+    // ==========================================
+    const mapElement = document.getElementById('interactive-map');
+    
+    if (mapElement && typeof L !== 'undefined') {
+        console.log('Inicializando mapa interactivo...');
+        
+        // Coordenadas del terreno
+        const BOUNDS = {
+            north: -31.942797,  // 31°56'34.07"S
+            south: -31.969139,  // 31°58'8.90"S
+            east: -64.632783,   // 64°37'58.02"W
+            west: -64.644947    // 64°38'41.81"W
+        };
+        
+        // Centro del mapa (31°57'41.9"S 64°38'24.8"W)
+        const CENTER = [-31.961639, -64.640222];
+        
+        // Rutas de las imágenes
+        const OVERLAYS = {
+            chacras: '/assets/images/googleEarth/all_views__chacras_b.png',
+            ph: '/assets/images/googleEarth/all_views__ph_b.png'
+        };
+        
+        // Variables globales del mapa
+        let map;
+        let overlay1 = null;  // Chacras
+        let overlay2 = null;  // PH
+        let currentLayer = 'ph';
+        
+        // Crear el mapa con OpenStreetMap
+        map = L.map('interactive-map', {
+            center: CENTER,
+            zoom: 17,
+            zoomControl: true
+        });
+        
+        // Capa satelital (ESRI World Imagery)
+        const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '&copy; <a href="https://www.esri.com/">Esri</a>',
+            maxZoom: 19,
+            className: 'satellite-tiles'
+        });
+        
+        // Capa de calles (OpenStreetMap)
+        const streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 19
+        });
+        
+        // Agregar capa satelital por defecto
+        satelliteLayer.addTo(map);
+        
+        // Control de capas base
+        L.control.layers({
+            'Satélite': satelliteLayer,
+            'Calles': streetLayer
+        }, null, {
+            position: 'topright'
+        }).addTo(map);
+        
+        console.log('Mapa creado. Configurando overlays...');
+        
+        // Crear los overlays de imagen
+        const imageBounds = [
+            [BOUNDS.south, BOUNDS.west],
+            [BOUNDS.north, BOUNDS.east]
+        ];
+        
+        overlay1 = L.imageOverlay(OVERLAYS.chacras, imageBounds, {
+            opacity: 0.8,
+            interactive: false,
+            className: 'yellow-overlay'
+        });
+        
+        overlay2 = L.imageOverlay(OVERLAYS.ph, imageBounds, {
+            opacity: 0.8,
+            interactive: false,
+            className: 'yellow-overlay'
+        });
+        
+        console.log('Overlays creados.');
+        
+        // Crear control personalizado de botones
+        const LayerControl = L.Control.extend({
+            options: {
+                position: 'topleft'
+            },
+            
+            onAdd: function(map) {
+                const container = L.DomUtil.create('div', 'map-controls leaflet-bar');
+                
+                container.innerHTML = `
+                    <h3>Capas del Terreno</h3>
+                    <div class="button-group">
+                        <button class="layer-button" data-layer="chacras">
+                            Subdivisión Chacras
+                        </button>
+                        <button class="layer-button active" data-layer="ph">
+                            Propiedad Horizontal
+                        </button>
+                    </div>
+                `;
+                
+                // Prevenir propagación de eventos del mapa
+                L.DomEvent.disableClickPropagation(container);
+                L.DomEvent.disableScrollPropagation(container);
+                
+                // Agregar event listeners
+                const buttons = container.querySelectorAll('.layer-button');
+                console.log('Botones encontrados:', buttons.length);
+                
+                buttons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const layer = this.getAttribute('data-layer');
+                        console.log('Botón clickeado:', layer);
+                        switchLayer(layer);
+                        
+                        // Actualizar estado activo
+                        buttons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                    });
+                });
+                
+                return container;
+            }
+        });
+        
+        // Agregar el control al mapa
+        map.addControl(new LayerControl());
+        console.log('Panel de control agregado al mapa.');
+        
+
+        
+        // Función para cambiar capa visible
+        function switchLayer(layer) {
+            console.log('Cambiando a capa:', layer);
+            currentLayer = layer;
+            
+            // Remover todas las capas
+            if (map.hasLayer(overlay1)) {
+                map.removeLayer(overlay1);
+            }
+            if (map.hasLayer(overlay2)) {
+                map.removeLayer(overlay2);
+            }
+            console.log('Todas las capas ocultadas');
+            
+            // Agregar solo la capa seleccionada
+            switch(layer) {
+                case 'chacras':
+                    overlay1.addTo(map);
+                    console.log('Mostrando capa Chacras');
+                    break;
+                case 'ph':
+                    overlay2.addTo(map);
+                    console.log('Mostrando capa PH');
+                    break;
+                case 'none':
+                default:
+                    console.log('Sin capas visibles');
+                    break;
+            }
+        }
+        
+        // Mostrar capa PH por defecto
+        overlay2.addTo(map);
+        
+        console.log('Mapa interactivo inicializado correctamente.');
+    }
+    
+    
+    // ==========================================
+    // MAPA DE UBICACIÓN (SECCIÓN UBICACIÓN)
+    // ==========================================
+    const locationMapElement = document.getElementById('location-map');
+    
+    if (locationMapElement && typeof L !== 'undefined') {
+        console.log('Inicializando mapa de ubicación...');
+        
+        // Centro del mapa (31°57'41.9"S 64°38'24.8"W)
+        const locationCenter = [-31.961639, -64.640222];
+        
+        // Crear el mapa de ubicación
+        const locationMap = L.map('location-map', {
+            center: locationCenter,
+            zoom: 15,
+            zoomControl: true
+        });
+        
+        // Capa satelital
+        const locationSatelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '&copy; <a href="https://www.esri.com/">Esri</a>',
+            maxZoom: 19,
+            className: 'satellite-tiles'
+        });
+        
+        // Capa de calles
+        const locationStreetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 19
+        });
+        
+        // Agregar capa satelital por defecto
+        locationSatelliteLayer.addTo(locationMap);
+        
+        // Control de capas
+        L.control.layers({
+            'Satélite': locationSatelliteLayer,
+            'Calles': locationStreetLayer
+        }, null, {
+            position: 'topright'
+        }).addTo(locationMap);
+        
+        // Agregar marcador en el centro
+        const marker = L.marker(locationCenter).addTo(locationMap);
+        marker.bindPopup('<b>El Alto de los Cinco</b><br>Villa General Belgrano, Córdoba').openPopup();
+        
+        console.log('Mapa de ubicación inicializado.');
+    }
+    
+    
     // ==========================================
     // SMOOTH SCROLL FOR ANCHOR LINKS
     // ==========================================
