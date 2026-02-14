@@ -28,6 +28,7 @@
     .video360-mock { width: 100%; max-width: 600px; height: 220px; background: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 1.1rem; margin-bottom: 18px; }
     .planos-mock { width: 100%; max-width: 520px; height: 220px; background: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 1.1rem; margin-bottom: 18px; }
     .contact-block { background: #e5e5e5; border-radius: 12px; padding: 32px; text-align: center; margin-top: 24px; }
+    .contact-block p { font-size: 1rem; line-height: 1.5; margin: 0 0 12px 0; }
     .contact-btns { margin-top: 16px; }
     .contact-btn { background: #222; color: #fff; padding: 10px 24px; border-radius: 20px; margin: 0 8px; text-decoration: none; display: inline-block; }
     @media (max-width: 1200px) {
@@ -97,7 +98,7 @@
             <li>Vistas panorámicas</li>
             <li>Acceso privado directo al río Los Reartes</li>
             <li>A 12 km de Villa General Belgrano</li>
-            <li>Ingreso privado y único desde la ruta 210</li>
+            <li>Ingreso privado y único desde la ruta S210</li>
           </ul>
         </div>
         <div class="column">
@@ -106,7 +107,7 @@
         </div>
       </div>
       <p style="margin-top:18px;">Ubicado en una localización privilegiada dentro del ejido de Villa General Belgrano, El Alto de los Cinco ofrece vistas panorámicas, proximidad al río Los Reartes y acceso privado.</p>
-      <p style="margin-top:12px;">La propiedad se encuentra en un entorno privilegiado, rodeada de paisajes naturales y vecinos de excelente nivel. La zona combina la tranquilidad del río y la proximidad a barrios residenciales destacados, asegurando un ambiente exclusivo y armonioso. El entorno invita a disfrutar de la naturaleza y la calidad de vida, en una comunidad selecta y cuidada.</p>
+      <p style="margin-top:12px;">La propiedad se encuentra rodeada de paisajes naturales y desarrollos que coinciden en armonía y visión con el proyecto. La zona combina la tranquilidad del río y la cercanía a barrios residenciales destacados, asegurando un ambiente exclusivo y equilibrado. El entorno invita a disfrutar de la naturaleza y la calidad de vida.</p>
     </div>
   </section>
 
@@ -137,20 +138,22 @@
   <section class="section" id="planos">
     <div class="container">
       <div class="section-title">Planos y Distribución</div>
-      <div class="planos-filter" style="display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap;">
+      <p class="lead-paragraph">Visualizador de plano y mapa. Esta sección permite consultar el plano general, el detalle de chacras y las subdivisiones, mediante un visor interactivo con filtros y visualización sobre mapa.</p>
+      <div class="planos-filter" style="display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap; justify-content:center;">
         <button class="planos-filter-btn active">Detalle de chacras</button>
         <button class="planos-filter-btn">Subdivisión de chacras</button>
         <button class="planos-filter-btn">Plano general</button>
+        <button class="planos-filter-btn">Mapa con overlay</button>
       </div>
-      <div class="planos-mock" style="height:320px; max-width:900px;">[Plano interactivo con filtros]</div>
-      <p style="margin-top:18px;">Utilizá los filtros para ver el detalle de chacras, la subdivisión o el plano general del proyecto.</p>
+      <div class="planos-mock" style="height:320px; max-width:900px; margin: 0 auto;">[Plano interactivo con filtros]</div>
     </div>
   </section>
 
   <!-- 6. Material Visual -->
   <section class="section" id="material">
     <div class="container">
-      <div class="section-title">Material Visual</div>
+      <div class="section-title">Galería</div>
+      <p class="lead-paragraph">Vistas, panorámicas y videos para conocer en detalle el entorno y las posibilidades de este desarrollo de chacras.</p>
       <div class="columns">
         <div class="column" style="flex:2; min-width:320px;">
           <div class="slider-mock" style="height:320px; max-width:100%;">[Slider de fotos y videos]</div>
@@ -159,18 +162,17 @@
           <div class="gallery-mock" style="height:320px; max-width:100%;">[Masonry de imágenes/videos]</div>
         </div>
       </div>
-      <p style="margin-top:18px;">Explorá imágenes, videos y planos del lugar. La información técnica detallada se brinda personalmente a quienes lo requieran.</p>
     </div>
   </section>
 
-  <!-- 8. Invitación a Visitar y Contactar -->
+  <!-- 8. Contacto -->
   <section class="section" id="contacto">
     <div class="container">
-      <div class="section-title">Visite y Contáctenos</div>
+      <div class="section-title">Contacto</div>
       <div class="contact-block">
-        <p>Los invitamos a conocer el lugar personalmente y conversar con nosotros sobre el proyecto y sus posibilidades.<br>
-        Para coordinar una visita o solicitar información adicional, pueden contactarnos a los siguientes teléfonos o por email.<br>
-        <strong>El contacto es directo y personalizado.</strong></p>
+        <p>Te invitamos a conocer el lugar y conversar directamente con nosotros.</p>
+        <p>Para coordinar una visita o hacer alguna consulta,<br>
+        <strong>escribinos o llamanos por WhatsApp:</strong></p>
         <div class="contact-btns">
           <a href="#" class="contact-btn">WhatsApp</a>
           <a href="#" class="contact-btn">Teléfono</a>
