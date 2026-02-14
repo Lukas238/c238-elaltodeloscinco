@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Wireframe - El Alto de los Cinco</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f7f7f7; color: #222; margin: 0; }
+    .section { padding: 48px 0; border-bottom: 1px solid #e0e0e0; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .hero { background: #e5e5e5; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 420px; position: relative; }
+    .hero .video-mock { width: 100vw; max-width: 1440px; height: 340px; background: #bbb; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 2rem; margin-bottom: 24px; border-radius: 18px; }
+    .hero h1 { font-size: 2.5rem; margin: 0 0 12px 0; text-align: center; }
+    .hero p { font-size: 1.2rem; margin: 0 0 24px 0; text-align: center; }
+    .hero .cta { background: #222; color: #fff; padding: 12px 32px; border-radius: 24px; font-size: 1.1rem; text-decoration: none; margin-top: 8px; display: inline-block; }
+    .section-title { font-size: 2rem; margin-bottom: 18px; font-weight: 600; }
+    .cards { display: flex; gap: 24px; flex-wrap: wrap; }
+    .card { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px #0001; padding: 24px; flex: 1 1 220px; min-width: 220px; }
+    .columns { display: flex; gap: 32px; flex-wrap: wrap; }
+    .column { flex: 1 1 320px; min-width: 320px; }
+    .bullets { list-style: none; padding: 0; margin: 0; }
+    .bullets li { margin-bottom: 10px; padding-left: 20px; position: relative; }
+    .bullets li:before { content: '•'; position: absolute; left: 0; color: #888; }
+    .gallery-mock { width: 100%; max-width: 600px; height: 320px; background: #ddd; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 1.1rem; margin-bottom: 18px; }
+    .map-mock { width: 100%; max-width: 480px; height: 280px; background: #ddd; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 1.1rem; margin-bottom: 18px; }
+    .openmap-mock { width: 100%; max-width: 900px; height: 420px; background: #ccc; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 1.1rem; margin-bottom: 18px; }
+    .slider-mock { width: 100%; max-width: 600px; height: 180px; background: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 1.1rem; margin-bottom: 18px; }
+    .video360-mock { width: 100%; max-width: 600px; height: 220px; background: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 1.1rem; margin-bottom: 18px; }
+    .planos-mock { width: 100%; max-width: 520px; height: 220px; background: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 1.1rem; margin-bottom: 18px; }
+    .contact-block { background: #e5e5e5; border-radius: 12px; padding: 32px; text-align: center; margin-top: 24px; }
+    .contact-btns { margin-top: 16px; }
+    .contact-btn { background: #222; color: #fff; padding: 10px 24px; border-radius: 20px; margin: 0 8px; text-decoration: none; display: inline-block; }
+    @media (max-width: 1200px) {
+      .container { max-width: 98vw; }
+      .openmap-mock { max-width: 98vw; }
+    }
+    @media (max-width: 800px) {
+      .columns, .cards { flex-direction: column; gap: 16px; }
+      .container { padding: 0 8px; }
+      .gallery-mock, .slider-mock, .video360-mock, .planos-mock, .map-mock, .openmap-mock { max-width: 98vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. Presentación -->
+  <section class="section hero">
+    <div class="video-mock">[Video loop de fondo]</div>
+    <h1>El Alto de los Cinco</h1>
+    <p>Un emprendimiento exclusivo de chacras en Villa General Belgrano.<br>Calidad, naturaleza y seguridad jurídica en tu inversión.</p>
+    <a href="#contacto" class="cta">Contacto directo</a>
+  </section>
+
+  <!-- 2. Sobre el Proyecto -->
+  <section class="section" id="proyecto">
+    <div class="container">
+      <div class="section-title">Visión y Compromiso</div>
+      <div class="columns">
+        <div class="column">
+          <ul class="bullets">
+            <li>Buscamos crear un entorno donde la vida cotidiana sea más simple, segura y disfrutable.</li>
+            <li>Priorizamos la calidad urbana, el respeto por el entorno y la integración con la naturaleza.</li>
+            <li>El diseño y la infraestructura están pensados para acompañar el crecimiento de las familias y la comunidad.</li>
+            <li>Nos mueve la idea de compartir valores y construir juntos un lugar con identidad propia.</li>
+          </ul>
+        </div>
+        <div class="column">
+          <div class="cards">
+            <div class="card">
+              <strong>Superficie total:</strong><br> 5 hectáreas
+            </div>
+            <div class="card">
+              <strong>Unidades:</strong><br> 24 lotes residenciales
+            </div>
+            <div class="card">
+              <strong>Espacios comunes:</strong><br> Plaza, senderos y sector de juegos
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Ubicación y Entorno -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">Ubicación y Entorno</div>
+      <div class="columns">
+        <div class="column">
+          <div class="map-mock">[Mapa interactivo]</div>
+          <ul class="bullets">
+            <li>Localización privilegiada</li>
+            <li>Vistas panorámicas</li>
+            <li>Proximidad al río Los Reartes</li>
+            <li>Acceso privado</li>
+            <li>Cercanía a Villa General Belgrano</li>
+          </ul>
+        </div>
+        <div class="column">
+          <div class="gallery-mock">[Mini-galería de fotos]</div>
+          <div class="slider-mock">[Slider de imágenes del entorno]</div>
+        </div>
+      </div>
+      <p style="margin-top:18px;">Ubicado en una localización privilegiada dentro del ejido de Villa General Belgrano, El Alto de los Cinco ofrece vistas panorámicas, proximidad al río Los Reartes y acceso privado.</p>
+    </div>
+  </section>
+
+  <!-- 4. Seguridad Jurídica y Mensura -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">Seguridad Jurídica y Mensura</div>
+      <div class="cards" style="margin-bottom:18px;">
+        <div class="card">
+          <strong>Mensura profesional</strong><br>
+          Realizada por agrimensor matriculado, con mensura digital disponible.
+        </div>
+        <div class="card">
+          <strong>Títulos regularizados</strong><br>
+          Propiedad horizontal especial, subdivisión ágil y segura.
+        </div>
+        <div class="card">
+          <strong>Flexibilidad y transparencia</strong><br>
+          Documentación técnica disponible para interesados.
+        </div>
+      </div>
+      <ul class="bullets">
+        <li>Mensura digital y planos técnicos disponibles para interesados</li>
+        <li>Propiedad horizontal especial</li>
+        <li>Subdivisión futura sin complicaciones</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. Características del Proyecto -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">Características del Proyecto</div>
+      <div class="cards">
+        <div class="card">
+          <div class="planos-mock" style="height:180px;">[Imagen chacra 1]</div>
+          <strong>Chacra 1</strong><br>Superficie: [Placeholder]<br>Estado legal: [Placeholder]
+        </div>
+        <div class="card">
+          <div class="planos-mock" style="height:180px;">[Imagen chacra 2]</div>
+          <strong>Chacra 2</strong><br>Superficie: [Placeholder]<br>Estado legal: [Placeholder]
+        </div>
+        <div class="card">
+          <div class="planos-mock" style="height:180px;">[Imagen chacra 3]</div>
+          <strong>Chacra 3</strong><br>Superficie: [Placeholder]<br>Estado legal: [Placeholder]
+        </div>
+      </div>
+      <div class="planos-mock" style="margin-top:24px; height:320px; max-width:800px;">[Plano general con zoom y leyenda]</div>
+    </div>
+  </section>
+
+  <!-- 6. Planos y Distribución -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">Planos y Distribución</div>
+      <div class="planos-mock" style="height:220px; max-width:700px;">[Plano de líneas del emprendimiento completo]</div>
+      <div class="planos-mock" style="height:180px; max-width:520px;">[Detalle de las 5 parcelas en venta]</div>
+      <div class="planos-mock" style="height:180px; max-width:520px;">[Detalle de las parcelas subdivididas en propiedad horizontal]</div>
+      <div class="openmap-mock" style="height:340px; max-width:900px;">[OpenMap interactivo con overlay]</div>
+      <p style="margin-top:18px;">Consulte los planos generales y detalles de las parcelas disponibles, así como la distribución bajo propiedad horizontal especial. Visualice la ubicación real y la distribución de las parcelas mediante nuestro mapa interactivo, con el plano superpuesto sobre imágenes satelitales.</p>
+    </div>
+  </section>
+
+  <!-- 7. Material Visual -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">Material Visual</div>
+      <div class="gallery-mock" style="height:320px; max-width:600px;">[Galería de imágenes y planos]</div>
+      <div class="video360-mock" style="height:220px; max-width:600px;">[Videos 360 y sobrevuelos]</div>
+      <div class="slider-mock" style="height:180px; max-width:600px;">[Slider de fotos, masonry/grid]</div>
+      <p style="margin-top:18px;">Explore nuestra galería de imágenes, videos y planos para conocer el proyecto. La información técnica detallada se brinda personalmente a quienes lo requieran.</p>
+    </div>
+  </section>
+
+  <!-- 8. Invitación a Visitar y Contactar -->
+  <section class="section" id="contacto">
+    <div class="container">
+      <div class="section-title">Visite y Contáctenos</div>
+      <div class="contact-block">
+        <p>Invitamos a los interesados a visitar el emprendimiento y dialogar personalmente con los titulares.<br>Para coordinar una visita o solicitar información adicional, contáctenos por WhatsApp, teléfono o correo electrónico.<br><strong>El contacto es directo y personalizado.</strong></p>
+        <div class="contact-btns">
+          <a href="#" class="contact-btn">WhatsApp</a>
+          <a href="#" class="contact-btn">Teléfono</a>
+          <a href="#" class="contact-btn">Email</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
