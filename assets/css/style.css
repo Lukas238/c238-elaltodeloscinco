@@ -531,39 +531,79 @@ section {
 /* ============================================
    Planos y Distribución
    ============================================ */
-.planos-filters {
+
+/* Botones de overlay (Chacras/Subdivisiones) */
+.planos-overlay-buttons {
     display: flex;
     justify-content: center;
-    gap: 16px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
-.planos-filters .btn-group {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-}
-
-.planos-filters .plano-btn {
-    padding: 6px 16px;
-    font-size: 13px;
-    font-weight: 500;
+.planos-overlay-buttons .overlay-btn {
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 600;
     border-color: var(--primary);
     color: var(--primary);
+    border-width: 2px;
 }
 
-.planos-filters .plano-btn:hover {
+.planos-overlay-buttons .overlay-btn:hover {
     background-color: rgba(44, 95, 45, 0.1);
     border-color: var(--primary);
     color: var(--primary);
 }
 
-.planos-filters .plano-btn.active {
+.planos-overlay-buttons .overlay-btn.active {
     background-color: var(--primary);
     border-color: var(--primary);
     color: var(--white);
 }
 
-.planos-filters .plano-btn.active:hover {
+.planos-overlay-buttons .overlay-btn.active:hover {
+    background-color: #1e4620;
+    border-color: #1e4620;
+}
+
+/* Botones de vista dentro del mapa */
+.map-view-buttons {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.map-view-buttons .btn-group {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    background: white;
+    border-radius: 4px;
+}
+
+.map-view-buttons .view-btn {
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border-color: var(--primary);
+    color: var(--primary);
+    background: white;
+}
+
+.map-view-buttons .view-btn:hover {
+    background-color: rgba(44, 95, 45, 0.1);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.map-view-buttons .view-btn.active {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--white);
+}
+
+.map-view-buttons .view-btn.active:hover {
     background-color: #1e4620;
     border-color: #1e4620;
 }

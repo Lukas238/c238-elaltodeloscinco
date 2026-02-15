@@ -140,7 +140,8 @@
             scrollWheelZoom: false,  // Deshabilitar zoom con scroll - usar botones
             dragging: true,          // Permitir arrastrar el mapa
             touchZoom: true,         // Permitir zoom con pinch en móviles
-            doubleClickZoom: true    // Permitir zoom con doble click
+            doubleClickZoom: true,   // Permitir zoom con doble click
+            zoomAnimation: false     // Deshabilitar animación de zoom - evita saltos del overlay
         });
         
         // Capa satelital (ESRI World Imagery)
@@ -152,6 +153,12 @@
         // Capa blanca (sin tiles)
         whiteLayer = L.tileLayer('', {
             attribution: '',
+            maxZoom: 19
+        });
+        
+        // Crear capa de tránsito (OpenStreetMap)
+        const transitLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
             maxZoom: 19
         });
         
@@ -213,36 +220,10 @@
         updateMarkerVisibility();
         console.log('Zoom inicial del mapa:', interactiveMapInstance.getZoom());
         
-        // Event handler para botón de centrar proyecto
-        $('#btn-center-project').on('click', function() {
-            // Calcular centro del overlay (bounds del plano)
-            const overlayCenter = [
-                (BOUNDS.north + BOUNDS.south) / 2,
-                (BOUNDS.east + BOUNDS.west) / 2
-            ];
-            
-            // Verificar si ya estamos centrados en el proyecto (zoom 15)
-            const currentCenter = interactiveMapInstance.getCenter();
-            const currentZoom = interactiveMapInstance.getZoom();
-            
-            // Tolerancia para comparar coordenadas (aproximadamente 50 metros)
-            const tolerance = 0.0005;
-            const isCentered = Math.abs(currentCenter.lat - overlayCenter[0]) < tolerance &&
-                             Math.abs(currentCenter.lng - overlayCenter[1]) < tolerance &&
-                             currentZoom === 15;
-            
-            if (isCentered) {
-                // Ya está centrado, hacer zoom más cercano a las chacras/subdivisiones (zoom inicial)
-                interactiveMapInstance.setView(CENTER, 17);
-            } else {
-                // No está centrado, centrar el proyecto completo
-                interactiveMapInstance.setView(overlayCenter, 15);
-            }
-        });
-        
         // Event handlers para botones de overlay
         $('[data-overlay]').on('click', function() {
             const overlayType = $(this).data('overlay');
+            const isCurrentlyActive = $(this).hasClass('active');
             
             // Remover todos los overlays
             if (interactiveMapInstance.hasLayer(overlayChacras)) {
@@ -262,11 +243,40 @@
             // Actualizar botones activos
             $('[data-overlay]').removeClass('active');
             $(this).addClass('active');
+            
+            if (!isCurrentlyActive) {
+                // Primer click: hacer zoom detallado
+                interactiveMapInstance.setView(CENTER, 17);
+            } else {
+                // Click en botón activo: toggle entre vista detallada y vista completa
+                const currentCenter = interactiveMapInstance.getCenter();
+                const currentZoom = interactiveMapInstance.getZoom();
+                
+                // Calcular centro del overlay (bounds del plano)
+                const overlayCenter = [
+                    (BOUNDS.north + BOUNDS.south) / 2,
+                    (BOUNDS.east + BOUNDS.west) / 2
+                ];
+                
+                // Tolerancia para comparar coordenadas
+                const tolerance = 0.0005;
+                const isCenteredOnDetail = Math.abs(currentCenter.lat - CENTER[0]) < tolerance &&
+                                          Math.abs(currentCenter.lng - CENTER[1]) < tolerance &&
+                                          currentZoom === 17;
+                
+                if (isCenteredOnDetail) {
+                    // Ya está en vista detallada, cambiar a vista completa
+                    interactiveMapInstance.setView(overlayCenter, 15);
+                } else {
+                    // No está en vista detallada, ir a vista detallada
+                    interactiveMapInstance.setView(CENTER, 17);
+                }
+            }
         });
         
-        // Event handlers para botones de capa base
-        $('[data-baselayer]').on('click', function() {
-            const layerType = $(this).data('baselayer');
+        // Event handlers para botones de vista de mapa
+        $('[data-mapview]').on('click', function() {
+            const viewType = $(this).data('mapview');
             
             // Remover todas las capas base
             if (interactiveMapInstance.hasLayer(satelliteLayer)) {
@@ -275,32 +285,47 @@
             if (interactiveMapInstance.hasLayer(whiteLayer)) {
                 interactiveMapInstance.removeLayer(whiteLayer);
             }
+            if (interactiveMapInstance.hasLayer(transitLayer)) {
+                interactiveMapInstance.removeLayer(transitLayer);
+            }
             
-            // Agregar la capa seleccionada y cambiar color de overlays
-            if (layerType === 'satellite') {
+            if (viewType === 'satellite') {
+                // Vista satelital
                 satelliteLayer.addTo(interactiveMapInstance);
                 $('#interactive-map').css('background-color', '');
                 // Cambiar overlays a blanco para fondo satélite
-                if (overlayChacras) {
+                if (overlayChacras && overlayChacras.getElement()) {
                     overlayChacras.getElement().className = 'leaflet-image-layer overlay-white';
                 }
-                if (overlaySubdivisiones) {
+                if (overlaySubdivisiones && overlaySubdivisiones.getElement()) {
                     overlaySubdivisiones.getElement().className = 'leaflet-image-layer overlay-white';
                 }
-            } else if (layerType === 'white') {
+            } else if (viewType === 'transit') {
+                // Vista de roads (OpenStreetMap)
+                transitLayer.addTo(interactiveMapInstance);
+                $('#interactive-map').css('background-color', '');
+                // Cambiar overlays a negro para fondo con mapa
+                if (overlayChacras && overlayChacras.getElement()) {
+                    overlayChacras.getElement().className = 'leaflet-image-layer overlay-black';
+                }
+                if (overlaySubdivisiones && overlaySubdivisiones.getElement()) {
+                    overlaySubdivisiones.getElement().className = 'leaflet-image-layer overlay-black';
+                }
+            } else {
+                // Vista de líneas (fondo blanco)
                 whiteLayer.addTo(interactiveMapInstance);
                 $('#interactive-map').css('background-color', '#ffffff');
                 // Cambiar overlays a negro para fondo blanco
-                if (overlayChacras) {
+                if (overlayChacras && overlayChacras.getElement()) {
                     overlayChacras.getElement().className = 'leaflet-image-layer overlay-black';
                 }
-                if (overlaySubdivisiones) {
+                if (overlaySubdivisiones && overlaySubdivisiones.getElement()) {
                     overlaySubdivisiones.getElement().className = 'leaflet-image-layer overlay-black';
                 }
             }
             
             // Actualizar botones activos
-            $('[data-baselayer]').removeClass('active');
+            $('[data-mapview]').removeClass('active');
             $(this).addClass('active');
         });
         
