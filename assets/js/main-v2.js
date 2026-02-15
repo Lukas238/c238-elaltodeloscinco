@@ -15,8 +15,9 @@
         initHeroVideo();
         initMap();
         initInteractiveMap();
-        initSlickSlider();
+        // initSlickSlider(); // Deshabilitado - ahora usamos masonry grid
         initFancybox();
+        initGalleryVideos();
         initFloatingContact();
         initSmoothScroll();
         initMobileMenu();
@@ -498,6 +499,30 @@
                 }
             });
         }
+    }
+
+    // ============================================
+    // Gallery Video Thumbnails
+    // ============================================
+    function initGalleryVideos() {
+        const videoThumbs = document.querySelectorAll('.video-thumb-player');
+        
+        videoThumbs.forEach(video => {
+            // Asegurar que el video esté muteado en móviles
+            video.muted = true;
+            video.playsInline = true;
+            
+            // Manejar el loop con transición suave
+            video.addEventListener('ended', function() {
+                this.currentTime = 0;
+                this.play();
+            });
+            
+            // Intentar reproducir el video (algunos navegadores requieren interacción)
+            video.play().catch(err => {
+                console.log('Autoplay prevented:', err);
+            });
+        });
     }
 
     // ============================================
