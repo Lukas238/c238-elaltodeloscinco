@@ -173,15 +173,16 @@
         ];
         
         // Crear ambos overlays con coordenadas exactas y rotación
+        // Iniciar con opacity 0 para evitar flash antes de aplicar rotación
         overlayChacras = L.imageOverlay(OVERLAYS.chacras, imageBounds, {
-            opacity: 0.8,
+            opacity: 0,
             interactive: false,
             bubblingMouseEvents: false,
             className: 'overlay-black'
         });
         
         overlaySubdivisiones = L.imageOverlay(OVERLAYS.subdivisiones, imageBounds, {
-            opacity: 0.8,
+            opacity: 0,
             interactive: false,
             bubblingMouseEvents: false,
             className: 'overlay-black'
@@ -189,55 +190,15 @@
         
         // Listeners para cuando se agregan los overlays al mapa
         overlayChacras.on('add', function() {
-            try {
-                // Determinar la vista activa y aplicar color correcto
-                const isSatelliteView = interactiveMapInstance.hasLayer(satelliteLayer);
-                const colorClass = isSatelliteView ? 'overlay-white' : 'overlay-black';
-                
-                setTimeout(() => {
-                    try {
-                        const element = overlayChacras.getElement();
-                        if (element) {
-                            element.classList.remove('overlay-white', 'overlay-black');
-                            element.classList.add(colorClass);
-                        }
-                        applyRotationToOverlay(overlayChacras);
-                    } catch (e) {
-                        // Silenciar errores y reintentar
-                        setTimeout(() => applyRotationToOverlay(overlayChacras), 100);
-                    }
-                }, 50);
-            } catch (e) {
-                // Silenciar errores en el listener
-            }
+            setTimeout(() => applyRotationToOverlay(overlayChacras), 100);
         });
         
         overlaySubdivisiones.on('add', function() {
-            try {
-                // Determinar la vista activa y aplicar color correcto
-                const isSatelliteView = interactiveMapInstance.hasLayer(satelliteLayer);
-                const colorClass = isSatelliteView ? 'overlay-white' : 'overlay-black';
-                
-                setTimeout(() => {
-                    try {
-                        const element = overlaySubdivisiones.getElement();
-                        if (element) {
-                            element.classList.remove('overlay-white', 'overlay-black');
-                            element.classList.add(colorClass);
-                        }
-                        applyRotationToOverlay(overlaySubdivisiones);
-                    } catch (e) {
-                        // Silenciar errores y reintentar
-                        setTimeout(() => applyRotationToOverlay(overlaySubdivisiones), 100);
-                    }
-                }, 50);
-            } catch (e) {
-                // Silenciar errores en el listener
-            }
+            setTimeout(() => applyRotationToOverlay(overlaySubdivisiones), 100);
         });
         
-        // Transformación exacta del overlay según ajuste manual
-        const OVERLAY_TRANSFORM = 'translate3d(27px, -1714px, 0px) rotate(1.005deg)';
+        // Transformación: solo rotación (Leaflet maneja la posición)
+        const OVERLAY_ROTATION = 1.005; // grados
         
         function applyRotationToOverlay(overlay, retryCount = 0) {
             if (!overlay) return;
@@ -245,15 +206,25 @@
             try {
                 const element = overlay.getElement();
                 if (element) {
-                    // Aplicar transformación exacta
-                    element.style.transform = OVERLAY_TRANSFORM;
+                    // Obtener el transform actual de Leaflet (contiene la posición)
+                    const currentTransform = element.style.transform || '';
+                    
+                    // Remover cualquier rotación previa para evitar acumulación
+                    const transformWithoutRotation = currentTransform.replace(/\s*rotate\([^)]+\)/g, '').trim();
+                    
+                    // Agregar solo la rotación, manteniendo el posicionamiento de Leaflet
+                    element.style.transform = transformWithoutRotation + ` rotate(${OVERLAY_ROTATION}deg)`;
                     element.style.transformOrigin = 'center center';
+                    
+                    // Hacer visible el overlay con transición suave después de aplicar rotación
+                    element.style.transition = 'opacity 0.3s ease-in-out';
+                    setTimeout(() => {
+                        overlay.setOpacity(0.8);
+                    }, 50);
                 } else if (retryCount < 10) {
-                    // Si el elemento no está listo, intentar de nuevo (máximo 10 intentos)
                     setTimeout(() => applyRotationToOverlay(overlay, retryCount + 1), 50);
                 }
             } catch (error) {
-                // Silenciar errores durante operaciones de zoom
                 if (retryCount < 10) {
                     setTimeout(() => applyRotationToOverlay(overlay, retryCount + 1), 50);
                 }
@@ -261,46 +232,22 @@
         }
         
         // Función para cambiar clase sin perder el transform
-        function updateOverlayColor(overlay, colorClass, retryCount = 0) {
+        function updateOverlayColor(overlay, colorClass) {
             if (!overlay) return;
             
-            try {
-                // Verificar que el overlay esté en el mapa
-                if (!interactiveMapInstance.hasLayer(overlay)) {
-                    return; // No hacer nada si el overlay no está en el mapa
-                }
+            const element = overlay.getElement();
+            if (element) {
+                // Usar classList en lugar de reemplazar className completo
+                element.classList.remove('overlay-white', 'overlay-black');
+                element.classList.add(colorClass);
                 
-                const element = overlay.getElement();
-                if (element) {
-                    // Usar classList en lugar de reemplazar className completo
-                    element.classList.remove('overlay-white', 'overlay-black');
-                    element.classList.add(colorClass);
-                    
-                    // Re-aplicar transform después de delay corto
-                    setTimeout(() => applyRotationToOverlay(overlay), 20);
-                } else if (retryCount < 5) {
-                    // Si el elemento no está listo, intentar de nuevo
-                    setTimeout(() => updateOverlayColor(overlay, colorClass, retryCount + 1), 50);
-                }
-            } catch (error) {
-                // Silenciar errores y reintentar si es posible
-                if (retryCount < 5) {
-                    setTimeout(() => updateOverlayColor(overlay, colorClass, retryCount + 1), 50);
-                }
+                // Re-aplicar rotación (Leaflet recalcula posición, nosotros agregamos rotación)
+                setTimeout(() => applyRotationToOverlay(overlay), 50);
             }
         }
         
         // Mostrar overlay de chacras por defecto
         overlayChacras.addTo(interactiveMapInstance);
-        
-        // Forzar que Leaflet recalcule el tamaño del mapa después de la inicialización
-        setTimeout(() => {
-            if (interactiveMapInstance) {
-                interactiveMapInstance.invalidateSize();
-                // Asegurar que la rotación se aplique después de que todo esté renderizado
-                applyRotationToOverlay(overlayChacras);
-            }
-        }, 100);
         
         // Crear marker en el centro (solo visible en zoom out)
         centerMarker = L.marker(CENTER, {
@@ -322,37 +269,29 @@
             }
         }
         
-        // Listener para cambios de zoom, movimiento y resize
+        // Listener para cambios de zoom y movimiento
         interactiveMapInstance.on('zoomend moveend', function() {
-            try {
-                updateMarkerVisibility();
-                // Re-aplicar rotación después del zoom o movimiento
-                const activeOverlay = interactiveMapInstance.hasLayer(overlayChacras) ? overlayChacras : 
-                                      interactiveMapInstance.hasLayer(overlaySubdivisiones) ? overlaySubdivisiones : null;
-                if (activeOverlay) {
-                    applyRotationToOverlay(activeOverlay);
-                }
-            } catch (error) {
-                // Silenciar errores durante operaciones de zoom/movimiento
+            updateMarkerVisibility();
+            // Re-aplicar rotación después del zoom o movimiento
+            const activeOverlay = interactiveMapInstance.hasLayer(overlayChacras) ? overlayChacras : 
+                                  interactiveMapInstance.hasLayer(overlaySubdivisiones) ? overlaySubdivisiones : null;
+            if (activeOverlay) {
+                applyRotationToOverlay(activeOverlay);
             }
         });
         
-        // Listener para resize de ventana (Leaflet recalcula posiciones)
+        // Listener para resize de ventana
         let resizeTimeout;
         window.addEventListener('resize', function() {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(function() {
-                try {
-                    if (interactiveMapInstance) {
-                        interactiveMapInstance.invalidateSize();
-                        const activeOverlay = interactiveMapInstance.hasLayer(overlayChacras) ? overlayChacras : 
-                                              interactiveMapInstance.hasLayer(overlaySubdivisiones) ? overlaySubdivisiones : null;
-                        if (activeOverlay) {
-                            applyRotationToOverlay(activeOverlay);
-                        }
+                if (interactiveMapInstance) {
+                    interactiveMapInstance.invalidateSize();
+                    const activeOverlay = interactiveMapInstance.hasLayer(overlayChacras) ? overlayChacras : 
+                                          interactiveMapInstance.hasLayer(overlaySubdivisiones) ? overlaySubdivisiones : null;
+                    if (activeOverlay) {
+                        applyRotationToOverlay(activeOverlay);
                     }
-                } catch (error) {
-                    // Silenciar errores durante resize
                 }
             }, 200);
         });
@@ -365,11 +304,6 @@
             const overlayType = $(this).data('overlay');
             const isCurrentlyActive = $(this).hasClass('active');
             
-            // Determinar la vista activa
-            const isSatelliteView = interactiveMapInstance.hasLayer(satelliteLayer);
-            const isTransitView = interactiveMapInstance.hasLayer(transitLayer);
-            const colorClass = isSatelliteView ? 'overlay-white' : 'overlay-black';
-            
             // Remover todos los overlays
             if (interactiveMapInstance.hasLayer(overlayChacras)) {
                 interactiveMapInstance.removeLayer(overlayChacras);
@@ -378,15 +312,11 @@
                 interactiveMapInstance.removeLayer(overlaySubdivisiones);
             }
             
-            // Agregar el overlay seleccionado con el color correcto
+            // Agregar el overlay seleccionado
             if (overlayType === 'chacras') {
                 overlayChacras.addTo(interactiveMapInstance);
-                // Aplicar color según la vista activa
-                setTimeout(() => updateOverlayColor(overlayChacras, colorClass), 50);
             } else if (overlayType === 'subdivisiones') {
                 overlaySubdivisiones.addTo(interactiveMapInstance);
-                // Aplicar color según la vista activa
-                setTimeout(() => updateOverlayColor(overlaySubdivisiones, colorClass), 50);
             }
             
             // Actualizar botones activos
@@ -443,26 +373,20 @@
             }
             
             if (viewType === 'satellite') {
-                // Vista satelital
                 satelliteLayer.addTo(interactiveMapInstance);
                 $('#interactive-map').css('background-color', '');
-                // Cambiar solo el overlay activo a blanco para fondo satélite
                 if (activeOverlay) {
                     updateOverlayColor(activeOverlay, 'overlay-white');
                 }
             } else if (viewType === 'transit') {
-                // Vista de roads (OpenStreetMap)
                 transitLayer.addTo(interactiveMapInstance);
                 $('#interactive-map').css('background-color', '');
-                // Cambiar solo el overlay activo a negro para fondo con mapa
                 if (activeOverlay) {
                     updateOverlayColor(activeOverlay, 'overlay-black');
                 }
             } else {
-                // Vista de líneas (fondo blanco)
                 whiteLayer.addTo(interactiveMapInstance);
                 $('#interactive-map').css('background-color', '#ffffff');
-                // Cambiar solo el overlay activo a negro para fondo blanco
                 if (activeOverlay) {
                     updateOverlayColor(activeOverlay, 'overlay-black');
                 }
