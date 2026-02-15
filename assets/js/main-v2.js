@@ -105,6 +105,7 @@
     let overlaySubdivisiones = null;
     let satelliteLayer = null;
     let whiteLayer = null;
+    let centerMarker = null;
 
     function initInteractiveMap() {
         const mapContainer = document.getElementById('interactive-map');
@@ -154,8 +155,9 @@
             maxZoom: 19
         });
         
-        // Agregar capa satelital por defecto
-        satelliteLayer.addTo(interactiveMapInstance);
+        // Agregar capa blanca por defecto (Vista de Líneas)
+        whiteLayer.addTo(interactiveMapInstance);
+        $('#interactive-map').css('background-color', '#ffffff');
         
         // Bounds para los overlays de imagen
         const imageBounds = [
@@ -168,18 +170,75 @@
             opacity: 0.8,
             interactive: false,
             bubblingMouseEvents: false,
-            className: 'overlay-white'  // Blanco por defecto (para satélite)
+            className: 'overlay-black'  // Negro por defecto (para Vista de Líneas)
         });
         
         overlaySubdivisiones = L.imageOverlay(OVERLAYS.subdivisiones, imageBounds, {
             opacity: 0.8,
             interactive: false,
             bubblingMouseEvents: false,
-            className: 'overlay-white'  // Blanco por defecto (para satélite)
+            className: 'overlay-black'  // Negro por defecto (para Vista de Líneas)
         });
         
         // Mostrar overlay de chacras por defecto
         overlayChacras.addTo(interactiveMapInstance);
+        
+        // Crear marker en el centro (solo visible en zoom out)
+        centerMarker = L.marker(CENTER, {
+            title: 'El Alto de los Cinco'
+        });
+        
+        // Función para mostrar/ocultar marker según zoom
+        function updateMarkerVisibility() {
+            const currentZoom = interactiveMapInstance.getZoom();
+            // Mostrar marker solo cuando zoom <= 16 (cuando overlay completo es visible)
+            if (currentZoom <= 16) {
+                if (!interactiveMapInstance.hasLayer(centerMarker)) {
+                    centerMarker.addTo(interactiveMapInstance);
+                }
+            } else {
+                if (interactiveMapInstance.hasLayer(centerMarker)) {
+                    interactiveMapInstance.removeLayer(centerMarker);
+                }
+            }
+        }
+        
+        // Listener para cambios de zoom
+        interactiveMapInstance.on('zoomend', function() {
+            updateMarkerVisibility();
+            console.log('Zoom actual del mapa:', interactiveMapInstance.getZoom());
+        });
+        
+        // Check inicial
+        updateMarkerVisibility();
+        console.log('Zoom inicial del mapa:', interactiveMapInstance.getZoom());
+        
+        // Event handler para botón de centrar proyecto
+        $('#btn-center-project').on('click', function() {
+            // Calcular centro del overlay (bounds del plano)
+            const overlayCenter = [
+                (BOUNDS.north + BOUNDS.south) / 2,
+                (BOUNDS.east + BOUNDS.west) / 2
+            ];
+            
+            // Verificar si ya estamos centrados en el proyecto (zoom 15)
+            const currentCenter = interactiveMapInstance.getCenter();
+            const currentZoom = interactiveMapInstance.getZoom();
+            
+            // Tolerancia para comparar coordenadas (aproximadamente 50 metros)
+            const tolerance = 0.0005;
+            const isCentered = Math.abs(currentCenter.lat - overlayCenter[0]) < tolerance &&
+                             Math.abs(currentCenter.lng - overlayCenter[1]) < tolerance &&
+                             currentZoom === 15;
+            
+            if (isCentered) {
+                // Ya está centrado, hacer zoom más cercano a las chacras/subdivisiones (zoom inicial)
+                interactiveMapInstance.setView(CENTER, 17);
+            } else {
+                // No está centrado, centrar el proyecto completo
+                interactiveMapInstance.setView(overlayCenter, 15);
+            }
+        });
         
         // Event handlers para botones de overlay
         $('[data-overlay]').on('click', function() {

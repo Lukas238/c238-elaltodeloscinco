@@ -569,7 +569,6 @@ section {
 }
 
 .planos-map-container {
-    max-width: 900px;
     margin: 0 auto;
     border-radius: var(--radius-md);
     overflow: hidden;
@@ -577,6 +576,28 @@ section {
     position: relative;
     height: calc(100vh - 200px);
     background: #ffffff;
+}
+
+.btn-center-project {
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    border-color: var(--primary);
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.btn-center-project:hover {
+    background-color: rgba(44, 95, 45, 0.1);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn-center-project svg {
+    flex-shrink: 0;
 }
 
 #interactive-map {
@@ -599,23 +620,10 @@ section {
 /* Overlay filters for plano images on map */
 .overlay-white {
     filter: brightness(0) invert(1);
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
 }
 
 .overlay-black {
     filter: brightness(0);
-    will-change: transform;
-    transform: translateZ(0);
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
-
-.leaflet-overlay-pane {
-    will-change: transform;
-    transform: translateZ(0);
 }
 
 /* ============================================
