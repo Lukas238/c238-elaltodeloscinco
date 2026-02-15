@@ -188,48 +188,87 @@
             className: 'overlay-black'
         });
         
+        // Transformación: solo rotación (Leaflet maneja la posición)
+        const OVERLAY_ROTATION = 1.005; // grados
+        let overlayObservers = new Map(); // Para trackear los observers
+        
+        // Función para aplicar rotación sin trigger de observer
+        function applyRotationToOverlayDirect(element) {
+            if (!element) return;
+            
+            const currentTransform = element.style.transform || '';
+            const transformWithoutRotation = currentTransform.replace(/\s*rotate\([^)]+\)/g, '').trim();
+            element.style.transform = transformWithoutRotation + ` rotate(${OVERLAY_ROTATION}deg)`;
+            element.style.transformOrigin = 'center center';
+        }
+        
+        // Configurar observer para un overlay
+        function setupOverlayObserver(overlay) {
+            const element = overlay.getElement();
+            if (!element) {
+                setTimeout(() => setupOverlayObserver(overlay), 50);
+                return;
+            }
+            
+            // Desconectar observer anterior si existe
+            if (overlayObservers.has(overlay)) {
+                overlayObservers.get(overlay).disconnect();
+            }
+            
+            // Aplicar rotación inicial
+            applyRotationToOverlayDirect(element);
+            
+            // Hacer visible con fade-in
+            const currentOpacity = parseFloat(window.getComputedStyle(element).opacity);
+            if (currentOpacity === 0) {
+                element.style.transition = 'opacity 0.3s ease-in-out';
+                setTimeout(() => overlay.setOpacity(0.8), 50);
+            }
+            
+            // Crear observer para detectar cambios de transform de Leaflet
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                        const transform = element.style.transform;
+                        // Solo reaplica si no tiene la rotación correcta
+                        if (transform && !transform.includes(`rotate(${OVERLAY_ROTATION}deg)`)) {
+                            applyRotationToOverlayDirect(element);
+                        }
+                    }
+                });
+            });
+            
+            observer.observe(element, {
+                attributes: true,
+                attributeFilter: ['style']
+            });
+            
+            overlayObservers.set(overlay, observer);
+        }
+        
         // Listeners para cuando se agregan los overlays al mapa
         overlayChacras.on('add', function() {
-            setTimeout(() => applyRotationToOverlay(overlayChacras), 100);
+            setTimeout(() => setupOverlayObserver(overlayChacras), 100);
         });
         
         overlaySubdivisiones.on('add', function() {
-            setTimeout(() => applyRotationToOverlay(overlaySubdivisiones), 100);
+            setTimeout(() => setupOverlayObserver(overlaySubdivisiones), 100);
         });
         
-        // Transformación: solo rotación (Leaflet maneja la posición)
-        const OVERLAY_ROTATION = 1.005; // grados
-        
-        function applyRotationToOverlay(overlay, retryCount = 0) {
-            if (!overlay) return;
-            
-            try {
-                const element = overlay.getElement();
-                if (element) {
-                    // Obtener el transform actual de Leaflet (contiene la posición)
-                    const currentTransform = element.style.transform || '';
-                    
-                    // Remover cualquier rotación previa para evitar acumulación
-                    const transformWithoutRotation = currentTransform.replace(/\s*rotate\([^)]+\)/g, '').trim();
-                    
-                    // Agregar solo la rotación, manteniendo el posicionamiento de Leaflet
-                    element.style.transform = transformWithoutRotation + ` rotate(${OVERLAY_ROTATION}deg)`;
-                    element.style.transformOrigin = 'center center';
-                    
-                    // Hacer visible el overlay con transición suave después de aplicar rotación
-                    element.style.transition = 'opacity 0.3s ease-in-out';
-                    setTimeout(() => {
-                        overlay.setOpacity(0.8);
-                    }, 50);
-                } else if (retryCount < 10) {
-                    setTimeout(() => applyRotationToOverlay(overlay, retryCount + 1), 50);
-                }
-            } catch (error) {
-                if (retryCount < 10) {
-                    setTimeout(() => applyRotationToOverlay(overlay, retryCount + 1), 50);
-                }
+        // Listeners para cuando se remueven del mapa
+        overlayChacras.on('remove', function() {
+            if (overlayObservers.has(overlayChacras)) {
+                overlayObservers.get(overlayChacras).disconnect();
+                overlayObservers.delete(overlayChacras);
             }
-        }
+        });
+        
+        overlaySubdivisiones.on('remove', function() {
+            if (overlayObservers.has(overlaySubdivisiones)) {
+                overlayObservers.get(overlaySubdivisiones).disconnect();
+                overlayObservers.delete(overlaySubdivisiones);
+            }
+        });
         
         // Función para cambiar clase sin perder el transform
         function updateOverlayColor(overlay, colorClass) {
@@ -241,8 +280,8 @@
                 element.classList.remove('overlay-white', 'overlay-black');
                 element.classList.add(colorClass);
                 
-                // Re-aplicar rotación (Leaflet recalcula posición, nosotros agregamos rotación)
-                setTimeout(() => applyRotationToOverlay(overlay), 50);
+                // Re-aplicar rotación inmediatamente
+                applyRotationToOverlayDirect(element);
             }
         }
         
@@ -272,12 +311,7 @@
         // Listener para cambios de zoom y movimiento
         interactiveMapInstance.on('zoomend moveend', function() {
             updateMarkerVisibility();
-            // Re-aplicar rotación después del zoom o movimiento
-            const activeOverlay = interactiveMapInstance.hasLayer(overlayChacras) ? overlayChacras : 
-                                  interactiveMapInstance.hasLayer(overlaySubdivisiones) ? overlaySubdivisiones : null;
-            if (activeOverlay) {
-                applyRotationToOverlay(activeOverlay);
-            }
+            // MutationObserver se encarga automáticamente de mantener la rotación
         });
         
         // Listener para resize de ventana
@@ -287,11 +321,7 @@
             resizeTimeout = setTimeout(function() {
                 if (interactiveMapInstance) {
                     interactiveMapInstance.invalidateSize();
-                    const activeOverlay = interactiveMapInstance.hasLayer(overlayChacras) ? overlayChacras : 
-                                          interactiveMapInstance.hasLayer(overlaySubdivisiones) ? overlaySubdivisiones : null;
-                    if (activeOverlay) {
-                        applyRotationToOverlay(activeOverlay);
-                    }
+                    // MutationObserver se encarga automáticamente de mantener la rotación
                 }
             }, 200);
         });
@@ -304,19 +334,40 @@
             const overlayType = $(this).data('overlay');
             const isCurrentlyActive = $(this).hasClass('active');
             
-            // Remover todos los overlays
+            // Remover todos los overlays (resetear opacity para próxima vez)
             if (interactiveMapInstance.hasLayer(overlayChacras)) {
+                overlayChacras.setOpacity(0);
                 interactiveMapInstance.removeLayer(overlayChacras);
             }
             if (interactiveMapInstance.hasLayer(overlaySubdivisiones)) {
+                overlaySubdivisiones.setOpacity(0);
                 interactiveMapInstance.removeLayer(overlaySubdivisiones);
             }
             
             // Agregar el overlay seleccionado
+            let activeOverlay = null;
             if (overlayType === 'chacras') {
                 overlayChacras.addTo(interactiveMapInstance);
+                activeOverlay = overlayChacras;
             } else if (overlayType === 'subdivisiones') {
                 overlaySubdivisiones.addTo(interactiveMapInstance);
+                activeOverlay = overlaySubdivisiones;
+            }
+            
+            // Determinar el color según la vista activa
+            if (activeOverlay) {
+                const isSatelliteView = interactiveMapInstance.hasLayer(satelliteLayer);
+                const isTransitView = interactiveMapInstance.hasLayer(transitLayer);
+                const colorClass = (isSatelliteView || isTransitView) ? 'overlay-white' : 'overlay-black';
+                
+                // Aplicar color correcto después de que el overlay esté en el mapa
+                setTimeout(() => {
+                    const element = activeOverlay.getElement();
+                    if (element) {
+                        element.classList.remove('overlay-white', 'overlay-black');
+                        element.classList.add(colorClass);
+                    }
+                }, 150);
             }
             
             // Actualizar botones activos
