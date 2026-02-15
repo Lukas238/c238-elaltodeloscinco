@@ -479,23 +479,37 @@
     // ============================================
     function initFancybox() {
         if (typeof Fancybox !== 'undefined') {
-            Fancybox.bind('[data-fancybox]', {
-                groupAll: false,
+            Fancybox.bind('[data-fancybox="gallery"]', {
+                groupAll: true,
                 Toolbar: {
                     display: {
-                        left: [],
+                        left: ['infobar'],
                         middle: [],
-                        right: ['close']
+                        right: ['slideshow', 'thumbs', 'close']
                     }
                 },
                 Thumbs: {
-                    type: 'classic'
+                    type: 'classic',
+                    autoStart: false
                 },
                 Images: {
-                    protected: true
+                    protected: true,
+                    zoom: true
                 },
                 Video: {
-                    autoplay: true
+                    autoplay: true,
+                    ratio: 16/9
+                },
+                Carousel: {
+                    infinite: true,
+                    transition: 'slide'
+                },
+                // Enhanced animation options
+                on: {
+                    ready: (fancybox) => {
+                        // Ensure panning animations are applied
+                        console.log('Fancybox gallery ready');
+                    }
                 }
             });
         }
