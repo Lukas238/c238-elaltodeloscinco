@@ -534,94 +534,53 @@ section {
 .planos-filters {
     display: flex;
     justify-content: center;
-    gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-xl);
+    gap: 16px;
+    margin-bottom: 16px;
     flex-wrap: wrap;
 }
 
-.plano-btn {
-    background-color: var(--white);
-    border: 2px solid var(--gray-300);
-    padding: 12px 24px;
-    border-radius: var(--radius-sm);
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--gray-700);
-    cursor: pointer;
-    transition: var(--transition);
+.planos-filters .btn-group {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
-.plano-btn:hover {
+.planos-filters .plano-btn {
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 500;
     border-color: var(--primary);
     color: var(--primary);
 }
 
-.plano-btn.active {
+.planos-filters .plano-btn:hover {
+    background-color: rgba(44, 95, 45, 0.1);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.planos-filters .plano-btn.active {
     background-color: var(--primary);
     border-color: var(--primary);
     color: var(--white);
 }
 
-.planos-viewer {
+.planos-filters .plano-btn.active:hover {
+    background-color: #1e4620;
+    border-color: #1e4620;
+}
+
+.planos-map-container {
     max-width: 900px;
     margin: 0 auto;
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: var(--shadow-md);
     position: relative;
-    height: 500px;
-    background: #f5f5f5;
+    height: calc(100vh - 200px);
+    background: #ffffff;
 }
 
-.planos-viewer img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    transition: var(--transition);
-    cursor: zoom-in;
-}
-
-.planos-viewer:hover img {
-    /* Removed transform scale to prevent issues with zoom */
-}
-
-/* Zoom controls for planos */
-.plano-zoom-controls {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    display: flex;
-    gap: 8px;
-    z-index: 100;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.planos-viewer:hover .plano-zoom-controls {
-    opacity: 1;
-}
-
-.zoom-btn {
-    width: 36px;
-    height: 36px;
-    background: white;
-    border: none;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--color-dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-}
-
-.zoom-btn:hover {
-    background: var(--color-primary);
-    color: white;
+#interactive-map {
+    background: #ffffff;
 }
 
 #interactive-map-container {
@@ -637,61 +596,17 @@ section {
     overflow: hidden;
 }
 
-/* Map Controls - Custom Overlay Selector (Bottom Center) */
-.leaflet-bottom.leaflet-left {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    pointer-events: none;
+/* Overlay filters for plano images on map */
+.overlay-white {
+    filter: brightness(0) invert(1);
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
-.map-controls-overlay {
-    z-index: 1000;
-    pointer-events: auto;
-}
-
-.btn-group-overlay {
-    display: inline-flex;
-    background: white;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
-    overflow: hidden;
-}
-
-.btn-overlay {
-    padding: 10px 20px;
-    border: none;
-    background: white;
-    color: var(--color-dark);
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    font-family: var(--font-sans);
-    border-right: 1px solid #e0e0e0;
-}
-
-.btn-overlay:last-child {
-    border-right: none;
-}
-
-.btn-overlay:hover {
-    background: #f5f5f5;
-}
-
-.btn-overlay.active {
-    background: #1e4620;
-    color: white;
-    font-weight: 600;
-}
-
-.btn-overlay.active:hover {
-    background: #153316;
-}
-
-/* Yellow overlay filter for plano images on map */
-.yellow-overlay {
-    filter: brightness(0) invert(1) sepia(1) saturate(10000%) hue-rotate(0deg);
+.overlay-black {
+    filter: brightness(0);
     will-change: transform;
     transform: translateZ(0);
     backface-visibility: hidden;
@@ -701,16 +616,6 @@ section {
 .leaflet-overlay-pane {
     will-change: transform;
     transform: translateZ(0);
-}
-
-/* Leaflet custom styles for planos section */
-#interactive-map-container .leaflet-bar {
-    box-shadow: var(--shadow-sm);
-}
-
-#interactive-map-container .leaflet-control-layers {
-    border: 2px solid var(--gray-300);
-    border-radius: var(--radius-sm);
 }
 
 /* ============================================

@@ -17,7 +17,6 @@
         initInteractiveMap();
         initSlickSlider();
         initFancybox();
-        initPlanosViewer();
         initFloatingContact();
         initSmoothScroll();
         initMobileMenu();
@@ -102,8 +101,10 @@
     // Interactive Map with Overlay (for Planos section)
     // ============================================
     let interactiveMapInstance = null;
-    let overlay1 = null;  // Chacras
-    let overlay2 = null;  // PH
+    let overlayChacras = null;
+    let overlaySubdivisiones = null;
+    let satelliteLayer = null;
+    let whiteLayer = null;
 
     function initInteractiveMap() {
         const mapContainer = document.getElementById('interactive-map');
@@ -126,40 +127,35 @@
         
         // Rutas de las imágenes overlay
         const OVERLAYS = {
-            chacras: 'assets/images/googleEarth/all_views__chacras_b.png',
-            ph: 'assets/images/googleEarth/all_views__ph_b.png'
+            chacras: 'assets/images/planos/plano__chacras.png',
+            subdivisiones: 'assets/images/planos/plano__subdivisiones.png'
         };
         
-        // Crear el mapa (solo una vez)
+        // Crear el mapa
         interactiveMapInstance = L.map('interactive-map', {
             center: CENTER,
             zoom: 17,
-            zoomControl: true
+            zoomControl: true,
+            scrollWheelZoom: false,  // Deshabilitar zoom con scroll - usar botones
+            dragging: true,          // Permitir arrastrar el mapa
+            touchZoom: true,         // Permitir zoom con pinch en móviles
+            doubleClickZoom: true    // Permitir zoom con doble click
         });
         
         // Capa satelital (ESRI World Imagery)
-        const satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: '&copy; <a href=\"https://www.esri.com/\">Esri</a>',
-            maxZoom: 19,
-            className: 'satellite-tiles'
+            maxZoom: 19
         });
         
-        // Capa de calles (OpenStreetMap)
-        const streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a>',
+        // Capa blanca (sin tiles)
+        whiteLayer = L.tileLayer('', {
+            attribution: '',
             maxZoom: 19
         });
         
         // Agregar capa satelital por defecto
         satelliteLayer.addTo(interactiveMapInstance);
-        
-        // Control de capas base
-        L.control.layers({
-            'Satélite': satelliteLayer,
-            'Calles': streetLayer
-        }, null, {
-            position: 'topright'
-        }).addTo(interactiveMapInstance);
         
         // Bounds para los overlays de imagen
         const imageBounds = [
@@ -168,89 +164,88 @@
         ];
         
         // Crear ambos overlays
-        overlay1 = L.imageOverlay(OVERLAYS.chacras, imageBounds, {
+        overlayChacras = L.imageOverlay(OVERLAYS.chacras, imageBounds, {
             opacity: 0.8,
             interactive: false,
             bubblingMouseEvents: false,
-            className: 'yellow-overlay'
+            className: 'overlay-white'  // Blanco por defecto (para satélite)
         });
         
-        overlay2 = L.imageOverlay(OVERLAYS.ph, imageBounds, {
+        overlaySubdivisiones = L.imageOverlay(OVERLAYS.subdivisiones, imageBounds, {
             opacity: 0.8,
             interactive: false,
             bubblingMouseEvents: false,
-            className: 'yellow-overlay'
+            className: 'overlay-white'  // Blanco por defecto (para satélite)
         });
         
-        // Función para cambiar entre overlays
-        function switchLayer(layer) {
-            // Remover todos los overlays primero
-            if (interactiveMapInstance.hasLayer(overlay1)) {
-                interactiveMapInstance.removeLayer(overlay1);
-            }
-            if (interactiveMapInstance.hasLayer(overlay2)) {
-                interactiveMapInstance.removeLayer(overlay2);
-            }
-            
-            // Agregar solo el overlay seleccionado
-            switch(layer) {
-                case 'chacras':
-                    overlay1.addTo(interactiveMapInstance);
-                    break;
-                case 'ph':
-                    overlay2.addTo(interactiveMapInstance);
-                    break;
-            }
-        }
+        // Mostrar overlay de chacras por defecto
+        overlayChacras.addTo(interactiveMapInstance);
         
-        // Crear control personalizado para selección de overlays
-        const LayerControl = L.Control.extend({
-            options: {
-                position: 'bottomleft'
-            },
+        // Event handlers para botones de overlay
+        $('[data-overlay]').on('click', function() {
+            const overlayType = $(this).data('overlay');
             
-            onAdd: function(map) {
-                const container = L.DomUtil.create('div', 'map-controls-overlay');
-                
-                container.innerHTML = `
-                    <div class="btn-group-overlay">
-                        <button class="btn-overlay" data-layer="chacras">
-                            Detalle de chacras
-                        </button>
-                        <button class="btn-overlay active" data-layer="ph">
-                            Subdivisión de Chacras
-                        </button>
-                    </div>
-                `;
-                
-                // Prevenir propagación de eventos del mapa
-                L.DomEvent.disableClickPropagation(container);
-                L.DomEvent.disableScrollPropagation(container);
-                
-                // Agregar event listeners a los botones
-                const buttons = container.querySelectorAll('.btn-overlay');
-                buttons.forEach(button => {
-                    button.addEventListener('click', function() {
-                        const layer = this.getAttribute('data-layer');
-                        switchLayer(layer);
-                        
-                        // Actualizar estado activo
-                        buttons.forEach(btn => btn.classList.remove('active'));
-                        this.classList.add('active');
-                    });
-                });
-                
-                return container;
+            // Remover todos los overlays
+            if (interactiveMapInstance.hasLayer(overlayChacras)) {
+                interactiveMapInstance.removeLayer(overlayChacras);
             }
+            if (interactiveMapInstance.hasLayer(overlaySubdivisiones)) {
+                interactiveMapInstance.removeLayer(overlaySubdivisiones);
+            }
+            
+            // Agregar el overlay seleccionado
+            if (overlayType === 'chacras') {
+                overlayChacras.addTo(interactiveMapInstance);
+            } else if (overlayType === 'subdivisiones') {
+                overlaySubdivisiones.addTo(interactiveMapInstance);
+            }
+            
+            // Actualizar botones activos
+            $('[data-overlay]').removeClass('active');
+            $(this).addClass('active');
         });
         
-        // Agregar el control personalizado al mapa
-        interactiveMapInstance.addControl(new LayerControl());
+        // Event handlers para botones de capa base
+        $('[data-baselayer]').on('click', function() {
+            const layerType = $(this).data('baselayer');
+            
+            // Remover todas las capas base
+            if (interactiveMapInstance.hasLayer(satelliteLayer)) {
+                interactiveMapInstance.removeLayer(satelliteLayer);
+            }
+            if (interactiveMapInstance.hasLayer(whiteLayer)) {
+                interactiveMapInstance.removeLayer(whiteLayer);
+            }
+            
+            // Agregar la capa seleccionada y cambiar color de overlays
+            if (layerType === 'satellite') {
+                satelliteLayer.addTo(interactiveMapInstance);
+                $('#interactive-map').css('background-color', '');
+                // Cambiar overlays a blanco para fondo satélite
+                if (overlayChacras) {
+                    overlayChacras.getElement().className = 'leaflet-image-layer overlay-white';
+                }
+                if (overlaySubdivisiones) {
+                    overlaySubdivisiones.getElement().className = 'leaflet-image-layer overlay-white';
+                }
+            } else if (layerType === 'white') {
+                whiteLayer.addTo(interactiveMapInstance);
+                $('#interactive-map').css('background-color', '#ffffff');
+                // Cambiar overlays a negro para fondo blanco
+                if (overlayChacras) {
+                    overlayChacras.getElement().className = 'leaflet-image-layer overlay-black';
+                }
+                if (overlaySubdivisiones) {
+                    overlaySubdivisiones.getElement().className = 'leaflet-image-layer overlay-black';
+                }
+            }
+            
+            // Actualizar botones activos
+            $('[data-baselayer]').removeClass('active');
+            $(this).addClass('active');
+        });
         
-        // Mostrar overlay de PH por defecto
-        overlay2.addTo(interactiveMapInstance);
-        
-        console.log('Mapa interactivo inicializado con overlays intercambiables');
+        console.log('Mapa interactivo inicializado con overlays y controles de capa base');
     }
 
     // ============================================
@@ -300,65 +295,6 @@
                 }
             });
         }
-    }
-
-    // ============================================
-    // Planos Viewer with Filter Buttons
-    // ============================================
-    function initPlanosViewer() {
-        const $btns = $('.plano-btn');
-        const $viewerImg = $('#plano-viewer-img');
-        const $viewerLink = $('#plano-viewer-link');
-        const $mapContainer = $('#interactive-map-container');
-
-        const planoData = {
-            detalle: {
-                src: 'assets/images/planos/plano__subdivision_detalle.jpg',
-                alt: 'Plano - Detalle de chacras'
-            },
-            subdivision: {
-                src: 'assets/images/planos/plano__prop_hoz__detalle.jpg',
-                alt: 'Plano - Subdivisión (Propiedad Horizontal Especial)'
-            },
-            general: {
-                src: 'assets/images/planos/plano__lote_10.jpg',
-                alt: 'Plano general - Lote total del emprendimiento'
-            },
-            mapa: {
-                type: 'map' // Special type for interactive map
-            }
-        };
-
-        $btns.on('click', function() {
-            const planoType = $(this).data('plano');
-            const plano = planoData[planoType];
-
-            if (plano) {
-                // Update active button
-                $btns.removeClass('active');
-                $(this).addClass('active');
-
-                if (plano.type === 'map') {
-                    // Show interactive map, hide image
-                    $viewerLink.fadeOut(200, function() {
-                        $mapContainer.fadeIn(200, function() {
-                            // Invalidate size to ensure Leaflet renders correctly
-                            if (interactiveMapInstance) {
-                                interactiveMapInstance.invalidateSize();
-                            }
-                        });
-                    });
-                } else {
-                    // Show image, hide map
-                    $mapContainer.fadeOut(200, function() {
-                        $viewerImg.attr('src', plano.src);
-                        $viewerImg.attr('alt', plano.alt);
-                        $viewerLink.attr('href', plano.src);
-                        $viewerLink.fadeIn(200);
-                    });
-                }
-            }
-        });
     }
 
     // ============================================
