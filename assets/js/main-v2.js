@@ -172,23 +172,41 @@
             [BOUNDS.north, BOUNDS.east]
         ];
         
-        // Crear ambos overlays
+        // Crear ambos overlays con coordenadas exactas y rotación
         overlayChacras = L.imageOverlay(OVERLAYS.chacras, imageBounds, {
             opacity: 0.8,
             interactive: false,
             bubblingMouseEvents: false,
-            className: 'overlay-black'  // Negro por defecto (para Vista de Líneas)
+            className: 'overlay-black'
         });
         
         overlaySubdivisiones = L.imageOverlay(OVERLAYS.subdivisiones, imageBounds, {
             opacity: 0.8,
             interactive: false,
             bubblingMouseEvents: false,
-            className: 'overlay-black'  // Negro por defecto (para Vista de Líneas)
+            className: 'overlay-black'
         });
+        
+        // Transformación exacta del overlay según ajuste manual
+        const OVERLAY_TRANSFORM = 'translate3d(27px, -1714px, 0px) rotate(1.005deg)';
+        
+        function applyRotationToOverlay(overlay) {
+            if (!overlay) return;
+            
+            const element = overlay.getElement();
+            if (element) {
+                // Aplicar transformación exacta
+                element.style.transform = OVERLAY_TRANSFORM;
+                element.style.transformOrigin = 'center center';
+            } else {
+                // Si el elemento no está listo, intentar de nuevo
+                setTimeout(() => applyRotationToOverlay(overlay), 50);
+            }
+        }
         
         // Mostrar overlay de chacras por defecto
         overlayChacras.addTo(interactiveMapInstance);
+        applyRotationToOverlay(overlayChacras);
         
         // Crear marker en el centro (solo visible en zoom out)
         centerMarker = L.marker(CENTER, {
@@ -210,15 +228,19 @@
             }
         }
         
-        // Listener para cambios de zoom
-        interactiveMapInstance.on('zoomend', function() {
+        // Listener para cambios de zoom y movimiento
+        interactiveMapInstance.on('zoomend moveend', function() {
             updateMarkerVisibility();
-            console.log('Zoom actual del mapa:', interactiveMapInstance.getZoom());
+            // Re-aplicar rotación después del zoom o movimiento
+            const activeOverlay = interactiveMapInstance.hasLayer(overlayChacras) ? overlayChacras : 
+                                  interactiveMapInstance.hasLayer(overlaySubdivisiones) ? overlaySubdivisiones : null;
+            if (activeOverlay) {
+                applyRotationToOverlay(activeOverlay);
+            }
         });
         
         // Check inicial
         updateMarkerVisibility();
-        console.log('Zoom inicial del mapa:', interactiveMapInstance.getZoom());
         
         // Event handlers para botones de overlay
         $('[data-overlay]').on('click', function() {
@@ -236,8 +258,10 @@
             // Agregar el overlay seleccionado
             if (overlayType === 'chacras') {
                 overlayChacras.addTo(interactiveMapInstance);
+                applyRotationToOverlay(overlayChacras);
             } else if (overlayType === 'subdivisiones') {
                 overlaySubdivisiones.addTo(interactiveMapInstance);
+                applyRotationToOverlay(overlaySubdivisiones);
             }
             
             // Actualizar botones activos
@@ -296,9 +320,11 @@
                 // Cambiar overlays a blanco para fondo satélite
                 if (overlayChacras && overlayChacras.getElement()) {
                     overlayChacras.getElement().className = 'leaflet-image-layer overlay-white';
+                    applyRotationToOverlay(overlayChacras);
                 }
                 if (overlaySubdivisiones && overlaySubdivisiones.getElement()) {
                     overlaySubdivisiones.getElement().className = 'leaflet-image-layer overlay-white';
+                    applyRotationToOverlay(overlaySubdivisiones);
                 }
             } else if (viewType === 'transit') {
                 // Vista de roads (OpenStreetMap)
@@ -307,9 +333,11 @@
                 // Cambiar overlays a negro para fondo con mapa
                 if (overlayChacras && overlayChacras.getElement()) {
                     overlayChacras.getElement().className = 'leaflet-image-layer overlay-black';
+                    applyRotationToOverlay(overlayChacras);
                 }
                 if (overlaySubdivisiones && overlaySubdivisiones.getElement()) {
                     overlaySubdivisiones.getElement().className = 'leaflet-image-layer overlay-black';
+                    applyRotationToOverlay(overlaySubdivisiones);
                 }
             } else {
                 // Vista de líneas (fondo blanco)
@@ -318,9 +346,11 @@
                 // Cambiar overlays a negro para fondo blanco
                 if (overlayChacras && overlayChacras.getElement()) {
                     overlayChacras.getElement().className = 'leaflet-image-layer overlay-black';
+                    applyRotationToOverlay(overlayChacras);
                 }
                 if (overlaySubdivisiones && overlaySubdivisiones.getElement()) {
                     overlaySubdivisiones.getElement().className = 'leaflet-image-layer overlay-black';
+                    applyRotationToOverlay(overlaySubdivisiones);
                 }
             }
             
