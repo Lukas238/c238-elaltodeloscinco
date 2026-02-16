@@ -1,7 +1,0 @@
-title: El Alto de los Cinco
-baseurl: ""
-url: "https://elaltodeloscinco.com.ar"
-markdown: kramdown
-sass:
-  sass_dir: _sass
-  style: compressed

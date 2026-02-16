@@ -1,22 +1,26 @@
 # El Alto de los Cinco - Sitio Web
 
-Sitio web estático desarrollado con Jekyll para promocionar el proyecto inmobiliario "El Alto de los Cinco" en Villa General Belgrano, Córdoba.
+Sitio web estático para promocionar el desarrollo de chacras "El Alto de los Cinco" en Villa General Belgrano, Córdoba.
 
-## 🚀 Inicio Rápido
+## 🚀 Estructura del Proyecto
 
-### Prerrequisitos
+```
+/
+├── index.html              # Página principal (versión v2_2)
+├── assets/
+│   ├── css/
+│   │   └── style.css      # Estilos principales
+│   ├── js/
+│   │   └── main-v2.js     # JavaScript principal
+│   ├── images/            # Imágenes y recursos visuales
+│   └── videos/            # Videos promocionales
+├── docs/                  # Documentación del proyecto
+└── backup/                # Versiones anteriores y wireframes
+```
 
-- Ruby 2.7 o superior
-- RubyGems
-- GCC y Make (para compilar extensiones nativas)
+## 📦 Deployment
 
-### Instalación Local
-
-1. **Instalar dependencias:**
-   ```bash
-   cd src
-   bundle install
-   ```
+Este sitio está listo para deployar en GitHub Pages u otro hosting estático.
 
 2. **Ejecutar servidor de desarrollo:**
    ```bash

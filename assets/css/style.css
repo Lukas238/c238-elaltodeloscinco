@@ -443,70 +443,107 @@ section {
 /* ============================================
    Ubicación y Entorno
    ============================================ */
-.features-list {
-    list-style: none;
-    padding: 0;
-    margin-top: var(--spacing-md);
+
+/* Feature Cards inspired by v6 */
+.feature-cards-ubicacion {
+    display: grid;
+    gap: 16px;
 }
 
-.features-list li {
-    padding: var(--spacing-sm) 0;
-    padding-left: var(--spacing-lg);
-    position: relative;
+.feature-card-ubicacion {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 6px 20px;
+    background-color: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.feature-card-ubicacion:hover {
+    transform: translateX(8px);
+    box-shadow: var(--shadow-md);
+}
+
+.feature-icon-ubicacion {
+    min-width: 40px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, rgba(44, 95, 45, 0.1), rgba(44, 95, 45, 0.05));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 20px;
+}
+
+.feature-content {
+    flex: 1;
+}
+
+.feature-content p {
     font-size: 1rem;
     color: var(--gray-700);
+    margin-bottom: 0;
+    line-height: 1.5;
 }
 
-.features-list li::before {
-    font-family: 'bootstrap-icons';
+/* Horizontal Gallery inspired by v6 */
+.horizontal-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.horizontal-gallery-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    display: block;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.horizontal-gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.horizontal-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.horizontal-gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.horizontal-gallery-item .gallery-tag {
     position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--primary);
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-.features-list li[data-icon="geo-alt-fill"]::before {
-    content: "\F3CE";
-}
-
-.features-list li[data-icon="binoculars-fill"]::before {
-    content: "\F1B2";
-}
-
-.features-list li[data-icon="water"]::before {
-    content: "\F7F0";
-}
-
-.features-list li[data-icon="signpost-2-fill"]::before {
-    content: "\F66D";
-}
-
-.features-list li[data-icon="arrow-right-circle-fill"]::before {
-    content: "\F132";
+    bottom: 12px;
+    left: 12px;
+    background: rgba(44, 95, 45, 0.9);
+    color: white;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
 }
 
 .map-container {
     width: 100%;
-    height: 400px;
+    height: 100%;
+    min-height: 600px;
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
-}
-
-.mini-gallery-img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.mini-gallery-img:hover {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-md);
 }
 
 /* ============================================
@@ -562,83 +599,74 @@ section {
 }
 
 /* ============================================
-   Planos y Distribución
+   Planos y Distribución - Unified Controls
    ============================================ */
 
-/* Botones de overlay (Chacras/Subdivisiones) */
-.planos-overlay-buttons {
+/* Unified controls in single line inspired by v6 */
+.planos-controls-unified {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
 }
 
-.planos-overlay-buttons .overlay-btn {
-    padding: 12px 32px;
-    font-size: 16px;
+.planos-controls-unified .controls-group, .btn-group {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-group {
+    gap: 0;
+}
+
+.btn-group .btn-control {
+    border-radius: 0;
+    border-right: none;
+}
+
+.btn-group .btn-control:first-child {
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.btn-group .btn-control:last-child {
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    border-right: 2px solid var(--gray-300);
+}
+
+.btn-group .btn-control.active {
+    border-right: 2px solid var(--primary);
+}
+
+.planos-controls-unified .controls-divider {
+    color: var(--gray-300);
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.planos-controls-unified .btn-control {
+    padding: 10px 24px;
+    font-size: 15px;
     font-weight: 600;
-    border-color: var(--primary);
-    color: var(--primary);
-    border-width: 2px;
+    background-color: var(--white);
+    border: 2px solid var(--gray-300);
+    border-radius: var(--radius-sm);
+    color: var(--gray-700);
+    cursor: pointer;
+    transition: var(--transition);
 }
 
-.planos-overlay-buttons .overlay-btn:hover {
-    background-color: rgba(44, 95, 45, 0.1);
+.planos-controls-unified .btn-control:hover {
     border-color: var(--primary);
     color: var(--primary);
+    background-color: rgba(44, 95, 45, 0.05);
 }
 
-.planos-overlay-buttons .overlay-btn.active {
+.planos-controls-unified .btn-control.active {
     background-color: var(--primary);
     border-color: var(--primary);
     color: var(--white);
-}
-
-.planos-overlay-buttons .overlay-btn.active:hover {
-    background-color: #1e4620;
-    border-color: #1e4620;
-}
-
-/* Botones de vista dentro del mapa */
-.map-view-buttons {
-    position: absolute;
-    top: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-}
-
-.map-view-buttons .btn-group {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    background: white;
-    border-radius: 6px;
-}
-
-.map-view-buttons .view-btn {
-    padding: 6px 16px;
-    font-size: 13px;
-    font-weight: 500;
-    border-color: var(--primary);
-    color: var(--primary);
-    background: white;
-}
-
-.map-view-buttons .view-btn:hover {
-    background-color: rgba(44, 95, 45, 0.1);
-    border-color: var(--primary);
-    color: var(--primary);
-}
-
-.map-view-buttons .view-btn.active {
-    background-color: var(--primary);
-    border-color: var(--primary);
-    color: var(--white);
-}
-
-.map-view-buttons .view-btn.active:hover {
-    background-color: #1e4620;
-    border-color: #1e4620;
 }
 
 .planos-map-container {
@@ -651,23 +679,8 @@ section {
     background: #ffffff;
 }
 
-
-
 #interactive-map {
     background: #ffffff;
-}
-
-#interactive-map-container {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-#interactive-map {
-    height: 500px;
-    width: 100%;
-    border-radius: 8px;
-    overflow: hidden;
 }
 
 /* Overlay filters for plano images on map */
@@ -977,210 +990,133 @@ section {
     }
 }
 
-/* Responsive */
-@media (max-width: 1400px) {
-    .masonry-gallery {
-        grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: 140px;
-        grid-auto-flow: row;
-    }
-    
-    .masonry-large {
-        grid-column: span 2;
-        grid-row: span 2;
-    }
-    
-    .masonry-wide {
-        grid-column: span 2;
-        grid-row: span 2;
-    }
-    
-    .masonry-medium-wide {
-        grid-column: span 2;
-        grid-row: span 2;
-    }
-}
-
-@media (max-width: 1200px) {
-    .masonry-gallery {
-        grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: 140px;
-        grid-auto-flow: row;
-    }
-    
-    .masonry-large {
-        grid-column: span 4;
-        grid-row: span 3;
-    }
-    
-    .masonry-wide {
-        grid-column: span 4;
-        grid-row: span 2;
-    }
-    
-    .masonry-medium-wide {
-        grid-column: span 3;
-        grid-row: span 2;
-    }
-    
-    .masonry-tall {
-        grid-column: span 2;
-        grid-row: span 3;
-    }
-    
-    .masonry-medium-tall {
-        grid-column: span 2;
-        grid-row: span 3;
-    }
-}
-
-@media (max-width: 768px) {
-    .masonry-gallery {
-        grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: 120px;
-        gap: 12px;
-        grid-auto-flow: row;
-    }
-    
-    .masonry-large {
-        grid-column: span 4;
-        grid-row: span 3;
-    }
-    
-    .masonry-wide {
-        grid-column: span 4;
-        grid-row: span 2;
-    }
-    
-    .masonry-tall {
-        grid-column: span 2;
-        grid-row: span 3;
-    }
-    
-    .masonry-medium-wide {
-        grid-column: span 3;
-        grid-row: span 2;
-    }
-    
-    .masonry-medium-tall {
-        grid-column: span 2;
-        grid-row: span 3;
-    }
-    
-    .masonry-item:not(.masonry-large):not(.masonry-wide):not(.masonry-tall):not(.masonry-medium-wide):not(.masonry-medium-tall) {
-        grid-column: span 2;
-        grid-row: span 2;
-    }
-}
-
-@media (max-width: 576px) {
-    .masonry-gallery {
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: 140px;
-        gap: 10px;
-        grid-auto-flow: row;
-    }
-    
-    .masonry-large,
-    .masonry-wide,
-    .masonry-tall,
-    .masonry-medium-wide,
-    .masonry-medium-tall {
-        grid-column: span 2;
-        grid-row: span 2;
-    }
-    
-    .masonry-item:not(.masonry-large):not(.masonry-wide):not(.masonry-tall):not(.masonry-medium-wide):not(.masonry-medium-tall) {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
-}
-
 /* ============================================
-   Contacto
+   Contacto - Two Column Layout inspired by v6
    ============================================ */
 .section-contacto {
     padding: var(--spacing-4xl) 0;
 }
 
-.contacto-box {
-    max-width: 700px;
-    margin: 0 auto;
-    background-color: var(--white);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-2xl) var(--spacing-xl);
-    box-shadow: var(--shadow-md);
-    text-align: center;
-}
-
-.contacto-text {
+.contacto-intro {
     font-size: 1.125rem;
     line-height: 1.7;
     color: var(--gray-700);
-    margin-bottom: var(--spacing-xl);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto var(--spacing-xl);
 }
 
-.contacto-info {
+.contacto-content-v2 {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+}
+
+.contact-items-v2 {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-xl);
+    gap: var(--spacing-lg);
 }
 
-.contacto-item {
+.contact-item-v2 {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: var(--spacing-sm);
-    font-size: 1rem;
-    color: var(--gray-700);
-}
-
-.contacto-item svg {
-    color: var(--primary);
-}
-
-.contacto-buttons {
-    display: flex;
-    justify-content: center;
     gap: var(--spacing-md);
-    flex-wrap: wrap;
-}
-
-.btn-whatsapp,
-.btn-email {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-    padding: 14px 32px;
-    border-radius: var(--radius-sm);
-    font-weight: 600;
-    font-size: 1rem;
+    padding: var(--spacing-lg);
+    background-color: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
     transition: var(--transition);
 }
 
-.btn-whatsapp {
+.contact-item-v2:hover {
+    transform: translateX(8px);
+    box-shadow: var(--shadow-md);
+}
+
+.contact-circle-v2 {
+    min-width: 60px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 12px rgba(44, 95, 45, 0.3);
+}
+
+.contact-circle-v2 svg {
+    color: white;
+    stroke: white;
+}
+
+.contact-info-v2 {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.contact-label-v2 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.contact-value-v2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+.contact-actions-v2 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.btn-whatsapp-v2,
+.btn-email-v2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    padding: 18px 32px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-whatsapp-v2 {
     background-color: #25D366;
     color: var(--white);
 }
 
-.btn-whatsapp:hover {
+.btn-whatsapp-v2:hover {
     background-color: #1fb355;
     color: var(--white);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
 }
 
-.btn-email {
+.btn-email-v2 {
     background-color: var(--primary);
     color: var(--white);
 }
 
-.btn-email:hover {
+.btn-email-v2:hover {
     background-color: var(--primary-dark);
     color: var(--white);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
 }
 
 /* ============================================
@@ -1297,8 +1233,39 @@ section {
         font-size: 1.125rem;
     }
     
-    .slider-img {
-        height: 350px;
+    /* Two column layout becomes single column on tablet */
+    .contacto-content-v2 {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+    
+    .horizontal-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .map-container {
+        min-height: 400px;
+    }
+
+    .masonry-gallery {
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 140px;
+        grid-auto-flow: row;
+    }
+    
+    .masonry-large {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    
+    .masonry-wide {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    
+    .masonry-medium-wide {
+        grid-column: span 2;
+        grid-row: span 2;
     }
 }
 
@@ -1307,24 +1274,26 @@ section {
         font-size: 2rem;
     }
     
-    .planos-filters {
+    .planos-controls-unified {
         flex-direction: column;
-        align-items: stretch;
+        gap: 12px;
     }
     
-    .plano-btn {
-        width: 100%;
+    .planos-controls-unified .controls-divider {
+        display: none;
     }
     
-    .contacto-buttons {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .btn-whatsapp,
-    .btn-email {
+    .planos-controls-unified .controls-group {
         width: 100%;
         justify-content: center;
+    }
+    
+    .contacto-content-v2 {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-actions-v2 {
+        width: 100%;
     }
     
     .floating-contact {
@@ -1334,8 +1303,41 @@ section {
         height: 50px;
     }
     
-    .gallery-thumbs {
-        grid-template-columns: repeat(3, 1fr);
+    .masonry-gallery {
+        grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: 120px;
+        gap: 12px;
+        grid-auto-flow: row;
+    }
+    
+    .masonry-large {
+        grid-column: span 4;
+        grid-row: span 3;
+    }
+    
+    .masonry-wide {
+        grid-column: span 4;
+        grid-row: span 2;
+    }
+    
+    .masonry-tall {
+        grid-column: span 2;
+        grid-row: span 3;
+    }
+    
+    .masonry-medium-wide {
+        grid-column: span 3;
+        grid-row: span 2;
+    }
+    
+    .masonry-medium-tall {
+        grid-column: span 2;
+        grid-row: span 3;
+    }
+    
+    .masonry-item:not(.masonry-large):not(.masonry-wide):not(.masonry-tall):not(.masonry-medium-wide):not(.masonry-medium-tall) {
+        grid-column: span 2;
+        grid-row: span 2;
     }
 }
 
@@ -1349,8 +1351,35 @@ section {
         padding: var(--spacing-md);
     }
     
-    .contacto-box {
-        padding: var(--spacing-lg) var(--spacing-md);
+    .horizontal-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    
+    .contact-item-v2 {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .masonry-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 140px;
+        gap: 10px;
+        grid-auto-flow: row;
+    }
+    
+    .masonry-large,
+    .masonry-wide,
+    .masonry-tall,
+    .masonry-medium-wide,
+    .masonry-medium-tall {
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+    
+    .masonry-item:not(.masonry-large):not(.masonry-wide):not(.masonry-tall):not(.masonry-medium-wide):not(.masonry-medium-tall) {
+        grid-column: span 1;
+        grid-row: span 1;
     }
 }
 

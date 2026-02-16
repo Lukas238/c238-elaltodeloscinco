@@ -120,40 +120,78 @@
                     
                     <p>El entorno invita a disfrutar de la naturaleza y la calidad de vida.</p>
                     
-                    <ul class="features-list">
-                        <li data-icon="geo-alt-fill">Localización privilegiada</li>
-                        <li data-icon="binoculars-fill">Vistas panorámicas</li>
-                        <li data-icon="water">Acceso privado directo al río Los Reartes</li>
-                        <li data-icon="signpost-2-fill">A 12 km de Villa General Belgrano</li>
-                        <li data-icon="arrow-right-circle-fill">Ingreso privado y único desde la ruta S210</li>
-                    </ul>
+                    <!-- Feature Cards (Inspired by v6) -->
+                    <div class="feature-cards-ubicacion mt-4">
+                        <div class="feature-card-ubicacion">
+                            <div class="feature-icon-ubicacion">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </div>
+                            <div class="feature-content">
+                                <p>Localización privilegiada</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card-ubicacion">
+                            <div class="feature-icon-ubicacion">
+                                <i class="bi bi-binoculars-fill"></i>
+                            </div>
+                            <div class="feature-content">
+                                <p>Vistas panorámicas</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card-ubicacion">
+                            <div class="feature-icon-ubicacion">
+                                <i class="bi bi-water"></i>
+                            </div>
+                            <div class="feature-content">
+                                <p>Acceso privado directo al río Los Reartes</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card-ubicacion">
+                            <div class="feature-icon-ubicacion">
+                                <i class="bi bi-signpost-2-fill"></i>
+                            </div>
+                            <div class="feature-content">
+                                <p>A 12 km de Villa General Belgrano</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card-ubicacion">
+                            <div class="feature-icon-ubicacion">
+                                <i class="bi bi-arrow-right-circle-fill"></i>
+                            </div>
+                            <div class="feature-content">
+                                <p>Ingreso privado y único desde la ruta S210</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="col-lg-6">
                     <div id="map" class="map-container"></div>
-                    <div class="row g-2 mt-3">
-                        <div class="col-6">
-                            <a href="assets/images/gallery/view_N.jpg" data-fancybox="ubicacion" data-caption="Vista Norte">
-                                <img src="assets/images/gallery/view_N.jpg" alt="Vista Norte" class="img-fluid rounded mini-gallery-img">
-                            </a>
-                        </div>
-                        <div class="col-6">
-                            <a href="assets/images/gallery/view_S.jpg" data-fancybox="ubicacion" data-caption="Vista Sur">
-                                <img src="assets/images/gallery/view_S.jpg" alt="Vista Sur" class="img-fluid rounded mini-gallery-img">
-                            </a>
-                        </div>
-                        <div class="col-6">
-                            <a href="assets/images/gallery/view_E.jpg" data-fancybox="ubicacion" data-caption="Vista Este">
-                                <img src="assets/images/gallery/view_E.jpg" alt="Vista Este" class="img-fluid rounded mini-gallery-img">
-                            </a>
-                        </div>
-                        <div class="col-6">
-                            <a href="assets/images/gallery/river.jpg" data-fancybox="ubicacion" data-caption="Río Los Reartes">
-                                <img src="assets/images/gallery/river.jpg" alt="Río Los Reartes" class="img-fluid rounded mini-gallery-img">
-                            </a>
-                        </div>
-                    </div>
                 </div>
+            </div>
+            
+            <!-- Horizontal thumbnail gallery (Inspired by v6) -->
+            <div class="horizontal-gallery mt-5">
+                <a href="assets/images/gallery/view_N.jpg" data-fancybox="ubicacion" data-caption="Vista Norte" class="horizontal-gallery-item">
+                    <img src="assets/images/gallery/view_N.jpg" alt="Vista Norte">
+                    <div class="gallery-tag">Norte</div>
+                </a>
+                <a href="assets/images/gallery/view_S.jpg" data-fancybox="ubicacion" data-caption="Vista Sur" class="horizontal-gallery-item">
+                    <img src="assets/images/gallery/view_S.jpg" alt="Vista Sur">
+                    <div class="gallery-tag">Sur</div>
+                </a>
+                <a href="assets/images/gallery/view_E.jpg" data-fancybox="ubicacion" data-caption="Vista Este" class="horizontal-gallery-item">
+                    <img src="assets/images/gallery/view_E.jpg" alt="Vista Este">
+                    <div class="gallery-tag">Este</div>
+                </a>
+                <a href="assets/images/gallery/river.jpg" data-fancybox="ubicacion" data-caption="Río Los Reartes" class="horizontal-gallery-item">
+                    <img src="assets/images/gallery/river.jpg" alt="Río Los Reartes">
+                    <div class="gallery-tag">Río</div>
+                </a>
             </div>
         </div>
     </section>
@@ -168,19 +206,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card-mensura">
                         <div class="card-icon-mensura">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <!-- Tripod legs -->
-                                <line x1="4" y1="22" x2="12" y2="14"></line>
-                                <line x1="20" y1="22" x2="12" y2="14"></line>
-                                <line x1="12" y1="22" x2="12" y2="14"></line>
-                                <!-- Central column -->
-                                <line x1="12" y1="14" x2="12" y2="8"></line>
-                                <!-- Theodolite head/body -->
-                                <rect x="9" y="5" width="6" height="3" rx="0.5"></rect>
-                                <!-- Camera/scope -->
-                                <rect x="8" y="2" width="8" height="3" rx="1"></rect>
-                                <circle cx="12" cy="3.5" r="0.8" fill="currentColor"></circle>
-                            </svg>
+                            <i class="bi bi-rulers"></i>
                         </div>
                         <h3 class="card-title-mensura">Mensura profesional</h3>
                         <p class="card-text-mensura">Mensura real y profesional realizada por <strong>agrimensor matriculado</strong>. Siendo la base para la definición de superficies, límites, accesos y pendientes del terreno.</p>
@@ -216,19 +242,21 @@
             <h2 class="section-title text-center">Planos y Distribución</h2>
             <p class="section-lead text-center">Mapa interactivo con overlays de planos. Explorá las chacras y subdivisiones sobre el mapa satelital o con fondo blanco.</p>
             
-            <div class="planos-overlay-buttons">
-                <button type="button" class="btn btn-outline-primary overlay-btn active" data-overlay="chacras">Chacras</button>
-                <button type="button" class="btn btn-outline-primary overlay-btn" data-overlay="subdivisiones">Subdivisiones</button>
+            <!-- Single line controls with divider (Inspired by v6) -->
+            <div class="planos-controls-unified">
+                <div class="controls-group">
+                    <button type="button" class="btn-control active" data-overlay="chacras">Chacras</button>
+                    <button type="button" class="btn-control" data-overlay="subdivisiones">Subdivisiones</button>
+                </div>
+                <div class="controls-divider">|</div>
+                <div class="btn-group" role="group" aria-label="Vista del mapa">
+                    <button type="button" class="btn-control active" data-mapview="lines">Líneas</button>
+                    <button type="button" class="btn-control" data-mapview="transit">Calles</button>
+                    <button type="button" class="btn-control" data-mapview="satellite">Satelital</button>
+                </div>
             </div>
             
             <div class="planos-map-container">
-                <div class="map-view-buttons">
-                    <div class="btn-group" role="group" aria-label="Tipo de vista">
-                        <button type="button" class="btn btn-outline-primary view-btn active" data-mapview="lines">Líneas</button>
-                        <button type="button" class="btn btn-outline-primary view-btn" data-mapview="transit">Calles</button>
-                        <button type="button" class="btn btn-outline-primary view-btn" data-mapview="satellite">Satelital</button>
-                    </div>
-                </div>
                 <div id="interactive-map" style="width: 100%; height: 100%;"></div>
             </div>
         </div>
@@ -406,39 +434,51 @@
     <!-- Contacto -->
     <section id="contacto" class="section-contacto bg-light">
         <div class="container">
-            <div class="contacto-box">
-                <h2 class="section-title text-center">Contacto</h2>
-                <p class="contacto-text">Los <strong>invitamos a conocer el lugar</strong>. Para <strong>coordinar una visita</strong> o recibir más información, <strong>pueden contactarnos</strong>.</p>
-                
-                <div class="contacto-info">
-                    <div class="contacto-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                        </svg>
-                        <span>+54 9 3547 123456</span>
+            <h2 class="section-title text-center">Contacto</h2>
+            <p class="contacto-intro">Los <strong>invitamos a conocer el lugar</strong>. Para <strong>coordinar una visita</strong> o recibir más información, <strong>pueden contactarnos</strong>.</p>
+            
+            <!-- Two column layout (Inspired by v6) -->
+            <div class="contacto-content-v2">
+                <div class="contact-items-v2">
+                    <div class="contact-item-v2">
+                        <div class="contact-circle-v2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <div class="contact-info-v2">
+                            <span class="contact-label-v2">Teléfono</span>
+                            <span class="contact-value-v2">0054 911 xxxx.xxxx</span>
+                        </div>
                     </div>
-                    <div class="contacto-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg>
-                        <span>contacto@elaltodeloscinco.com.ar</span>
+                    
+                    <div class="contact-item-v2">
+                        <div class="contact-circle-v2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="contact-info-v2">
+                            <span class="contact-label-v2">Email</span>
+                            <span class="contact-value-v2">larralde_nielse@elaltodeloscinco.com.ar</span>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="contacto-buttons">
-                    <a href="https://wa.me/5493547123456" target="_blank" class="btn btn-whatsapp">
+                <div class="contact-actions-v2">
+                    <a href="https://wa.me/5493547123456" target="_blank" class="btn btn-whatsapp-v2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                         </svg>
-                        WhatsApp
+                        Contactar por WhatsApp
                     </a>
-                    <a href="mailto:contacto@elaltodeloscinco.com.ar" class="btn btn-email">
+                    <a href="mailto:larralde_nielse@elaltodeloscinco.com.ar" class="btn btn-email-v2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                             <polyline points="22,6 12,13 2,6"></polyline>
                         </svg>
-                        Email
+                        Enviar Email
                     </a>
                 </div>
             </div>
