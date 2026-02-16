@@ -174,6 +174,26 @@
         whiteLayer.addTo(interactiveMapInstance);
         $('#interactive-map').css('background-color', '#ffffff');
         
+        // Precargar las otras capas para evitar demora al cambiar vista
+        // Agregar brevemente con opacidad 0 para forzar descarga inicial
+        satelliteLayer.setOpacity(0);
+        transitLayer.setOpacity(0);
+        satelliteLayer.addTo(interactiveMapInstance);
+        transitLayer.addTo(interactiveMapInstance);
+        
+        // Removerlas después de un momento (ya iniciaron la carga)
+        setTimeout(() => {
+            if (interactiveMapInstance.hasLayer(satelliteLayer)) {
+                interactiveMapInstance.removeLayer(satelliteLayer);
+            }
+            if (interactiveMapInstance.hasLayer(transitLayer)) {
+                interactiveMapInstance.removeLayer(transitLayer);
+            }
+            // Restaurar opacidad para uso posterior
+            satelliteLayer.setOpacity(1);
+            transitLayer.setOpacity(1);
+        }, 2000);
+        
         // Bounds para los overlays de imagen
         const imageBounds = [
             [BOUNDS.south, BOUNDS.west],
