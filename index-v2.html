@@ -24,6 +24,12 @@
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Font Awesome 4.7 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -169,11 +175,17 @@
                     <div class="card-mensura">
                         <div class="card-icon-mensura">
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
-                                <polyline points="14 2 14 8 20 8"></polyline>
-                                <line x1="16" y1="13" x2="8" y2="13"></line>
-                                <line x1="16" y1="17" x2="8" y2="17"></line>
-                                <polyline points="10 9 9 9 8 9"></polyline>
+                                <!-- Tripod legs -->
+                                <line x1="4" y1="22" x2="12" y2="14"></line>
+                                <line x1="20" y1="22" x2="12" y2="14"></line>
+                                <line x1="12" y1="22" x2="12" y2="14"></line>
+                                <!-- Central column -->
+                                <line x1="12" y1="14" x2="12" y2="8"></line>
+                                <!-- Theodolite head/body -->
+                                <rect x="9" y="5" width="6" height="3" rx="0.5"></rect>
+                                <!-- Camera/scope -->
+                                <rect x="8" y="2" width="8" height="3" rx="1"></rect>
+                                <circle cx="12" cy="3.5" r="0.8" fill="currentColor"></circle>
                             </svg>
                         </div>
                         <h3 class="card-title-mensura">Mensura profesional</h3>
@@ -184,10 +196,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card-mensura">
                         <div class="card-icon-mensura">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                                <path d="M9 12l2 2 4-4"></path>
-                            </svg>
+                            <i class="fa fa-balance-scale"></i>
                         </div>
                         <h3 class="card-title-mensura">Títulos de Dominio y Subdivisión Inscriptos</h3>
                         <p class="card-text-mensura">Todas las chacras cuentan con títulos oficiales inscriptos en el registro de la propiedad. Subdivisiones bajo el régimen de propiedad horizontal especial.</p>
@@ -197,14 +206,10 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="card-mensura">
                         <div class="card-icon-mensura">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                            </svg>
+                            <i class="bi bi-box-seam-fill"></i>
                         </div>
                         <h3 class="card-title-mensura">Documentación Digital</h3>
-                        <p class="card-text-mensura">Toda la información gráfica y técnica deriva de este relevamiento. Incluye pendientes de gota, líneas de relieve y modelos 3D del terreno.</p>
+                        <p class="card-text-mensura">Información gráfica y técnica del relevamiento incluye pendientes de gota, líneas de relieve y modelos 3D del terreno.</p>
                     </div>
                 </div>
             </div>
@@ -243,7 +248,7 @@
             
             <div class="masonry-gallery mt-5">
                 <!-- Hero image -->
-                <a href="assets/images/gallery/view_air_N.jpg" data-fancybox="gallery" data-caption="Vista aérea Norte" class="masonry-item masonry-large">
+                <a href="assets/images/gallery/view_air_N.jpg" data-fancybox="gallery" data-caption="Vista aérea Norte" class="masonry-item masonry-medium-wide">
                     <div class="masonry-item-inner">
                         <img src="assets/images/gallery/view_air_N.jpg" alt="Vista aérea Norte">
                         <div class="masonry-overlay">
@@ -253,7 +258,7 @@
                 </a>
                 
                 <!-- Video 1 - Positioned high -->
-                <a href="assets/videos/DJI_20251008091133_0038_D_LRF.mp4" data-fancybox="gallery" data-type="video" data-caption="Video drone 1" class="masonry-item masonry-brick-horizontal">
+                <a href="assets/videos/DJI_20251008091133_0038_D_LRF.mp4" data-fancybox="gallery" data-type="video" data-caption="Video drone 1" class="masonry-item masonry-large">
                     <div class="masonry-item-inner masonry-video">
                         <video autoplay loop muted playsinline class="video-thumb-player">
                             <source src="assets/videos/DJI_20251008091133_0038_D_LRF.mp4" type="video/mp4">
@@ -265,7 +270,7 @@
                     </div>
                 </a>
                 
-                <a href="assets/images/gallery/view_air_SW.jpg" data-fancybox="gallery" data-caption="Vista aérea Suroeste" class="masonry-item masonry-medium-tall masonry-flip">
+                <a href="assets/images/gallery/view_air_SW.jpg" data-fancybox="gallery" data-caption="Vista aérea Suroeste" class="masonry-item masonry-small masonry-flip">
                     <div class="masonry-item-inner">
                         <div class="flip-card">
                             <div class="flip-front">
@@ -282,7 +287,7 @@
                 </a>
                 
                 <!-- Panning image - Keep high -->
-                <a href="assets/images/gallery/view_E.jpg" data-fancybox="gallery" data-caption="Vista Este" class="masonry-item masonry-wide masonry-pan">
+                <a href="assets/images/gallery/view_E.jpg" data-fancybox="gallery" data-caption="Vista Este" class="masonry-item masonry-medium-tall masonry-pan">
                     <div class="masonry-item-inner">
                         <img src="assets/images/gallery/view_E.jpg" alt="Vista Este" class="pan-image">
                         <div class="masonry-overlay">
@@ -304,7 +309,7 @@
                     </div>
                 </a>
                 
-                <a href="assets/images/gallery/view_down_road_entrance.jpg" data-fancybox="gallery" data-caption="Entrada al desarrollo" class="masonry-item masonry-medium-wide masonry-flip">
+                <a href="assets/images/gallery/view_down_road_entrance.jpg" data-fancybox="gallery" data-caption="Entrada al desarrollo" class="masonry-item masonry-medium-tall masonry-flip">
                     <div class="masonry-item-inner">
                         <div class="flip-card">
                             <div class="flip-front">
@@ -320,7 +325,7 @@
                     </div>
                 </a>
                 
-                <a href="assets/images/gallery/terreno_view_S.jpg" data-fancybox="gallery" data-caption="Vista del terreno" class="masonry-item masonry-tall">
+                <a href="assets/images/gallery/terreno_view_S.jpg" data-fancybox="gallery" data-caption="Vista del terreno" class="masonry-item masonry-medium-wide">
                     <div class="masonry-item-inner">
                         <img src="assets/images/gallery/terreno_view_S.jpg" alt="Vista del terreno">
                         <div class="masonry-overlay">
@@ -330,7 +335,7 @@
                 </a>
                 
                 <!-- Video 2 - Interspersed in middle -->
-                <a href="assets/videos/DJI_20251008091516_0039_D_LRF.mp4" data-fancybox="gallery" data-type="video" data-caption="Video drone 2" class="masonry-item masonry-small">
+                <a href="assets/videos/DJI_20251008091516_0039_D_LRF.mp4" data-fancybox="gallery" data-type="video" data-caption="Video drone 2" class="masonry-item masonry-wide">
                     <div class="masonry-item-inner masonry-video">
                         <video autoplay loop muted playsinline class="video-thumb-player">
                             <source src="assets/videos/DJI_20251008091516_0039_D_LRF.mp4" type="video/mp4">
@@ -342,7 +347,7 @@
                     </div>
                 </a>
                 
-                <a href="assets/images/gallery/view_N.jpg" data-fancybox="gallery" data-caption="Vista Norte" class="masonry-item masonry-brick-vertical masonry-flip">
+                <a href="assets/images/gallery/view_N.jpg" data-fancybox="gallery" data-caption="Vista Norte" class="masonry-item masonry-small masonry-flip">
                     <div class="masonry-item-inner">
                         <div class="flip-card">
                             <div class="flip-front">
@@ -358,7 +363,7 @@
                     </div>
                 </a>
                 
-                <a href="assets/images/gallery/view_S.jpg" data-fancybox="gallery" data-caption="Vista Sur" class="masonry-item masonry-medium-tall">
+                <a href="assets/images/gallery/view_S.jpg" data-fancybox="gallery" data-caption="Vista Sur" class="masonry-item masonry-small">
                     <div class="masonry-item-inner">
                         <img src="assets/images/gallery/view_S.jpg" alt="Vista Sur">
                         <div class="masonry-overlay">
@@ -367,7 +372,7 @@
                     </div>
                 </a>
                 
-                <a href="assets/images/gallery/view_O.jpg" data-fancybox="gallery" data-caption="Vista Oeste" class="masonry-item masonry-medium-wide masonry-flip">
+                <a href="assets/images/gallery/view_O.jpg" data-fancybox="gallery" data-caption="Vista Oeste" class="masonry-item masonry-small masonry-flip">
                     <div class="masonry-item-inner">
                         <div class="flip-card">
                             <div class="flip-front">
@@ -383,7 +388,7 @@
                     </div>
                 </a>
                 
-                <a href="assets/images/gallery/river.jpg" data-fancybox="gallery" data-caption="Río Los Reartes" class="masonry-item masonry-tall">
+                <a href="assets/images/gallery/river.jpg" data-fancybox="gallery" data-caption="Río Los Reartes" class="masonry-item masonry-medium-wide">
                     <div class="masonry-item-inner">
                         <img src="assets/images/gallery/river.jpg" alt="Río Los Reartes">
                         <div class="masonry-overlay">

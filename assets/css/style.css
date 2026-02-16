@@ -514,6 +514,11 @@ section {
     color: var(--primary);
 }
 
+.card-icon-mensura i {
+    color: var(--primary);
+    font-size: 40px;
+}
+
 .card-title-mensura {
     font-size: 1.25rem;
     font-weight: 600;
@@ -651,65 +656,54 @@ section {
    ============================================ */
 .masonry-gallery {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: 100px;
-    gap: 0;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 140px;
+    gap: 12px;
     grid-auto-flow: dense;
 }
 
 .masonry-item {
     position: relative;
     overflow: hidden;
-    border-radius: 0;
+    border-radius: 12px;
     cursor: pointer;
     display: block;
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Variantes de tamaño - Simulando ladrillos de diferentes proporciones */
+/* Variantes de tamaño - Tamaños más regulares */
 .masonry-large {
-    grid-column: span 6;
-    grid-row: span 4;
+    grid-column: span 3;
+    grid-row: span 3;
 }
 
 .masonry-wide {
-    grid-column: span 6;
+    grid-column: span 3;
     grid-row: span 2;
 }
 
 .masonry-tall {
-    grid-column: span 3;
-    grid-row: span 4;
+    grid-column: span 2;
+    grid-row: span 3;
 }
 
 .masonry-medium-wide {
-    grid-column: span 4;
+    grid-column: span 2;
     grid-row: span 2;
 }
 
 .masonry-medium-tall {
-    grid-column: span 3;
-    grid-row: span 3;
-}
-
-.masonry-brick-horizontal {
-    grid-column: span 4;
-    grid-row: span 1;
-}
-
-.masonry-brick-vertical {
-    grid-column: span 2;
-    grid-row: span 3;
-}
-
-.masonry-small {
     grid-column: span 2;
     grid-row: span 2;
 }
 
+.masonry-small {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
 /* Items normales sin clase especial */
-.masonry-item:not(.masonry-large):not(.masonry-wide):not(.masonry-tall):not(.masonry-medium-wide):not(.masonry-medium-tall):not(.masonry-brick-horizontal):not(.masonry-brick-vertical):not(.masonry-small) {
-    grid-column: span 3;
+.masonry-item:not(.masonry-large):not(.masonry-wide):not(.masonry-tall):not(.masonry-medium-wide):not(.masonry-medium-tall):not(.masonry-small) {
+    grid-column: span 2;
     grid-row: span 2;
 }
 
@@ -958,23 +952,23 @@ section {
 /* Responsive */
 @media (max-width: 1400px) {
     .masonry-gallery {
-        grid-template-columns: repeat(6, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         grid-auto-rows: 140px;
         grid-auto-flow: row;
     }
     
     .masonry-large {
-        grid-column: span 3;
-        grid-row: span 3;
+        grid-column: span 2;
+        grid-row: span 2;
     }
     
     .masonry-wide {
-        grid-column: span 3;
+        grid-column: span 2;
         grid-row: span 2;
     }
     
     .masonry-medium-wide {
-        grid-column: span 3;
+        grid-column: span 2;
         grid-row: span 2;
     }
 }

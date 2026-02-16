@@ -70,22 +70,32 @@
     function initMap() {
         if (typeof L !== 'undefined' && $('#map').length) {
             // Coordenadas exactas del terreno (31°57'41.9"S 64°38'24.8"W)
-            const lat = -31.961639;
-            const lng = -64.640222;
+            const terrenoLat = -31.961639;
+            const terrenoLng = -64.640222;
+            
+            // Coordenadas de Villa General Belgrano (centro)
+            const vgbLat = -31.9770;
+            const vgbLng = -64.5660;
+            
+            // Calcular punto medio entre ambas ubicaciones
+            const centerLat = (terrenoLat + vgbLat) / 2;
+            const centerLng = (terrenoLng + vgbLng) / 2;
 
             const map = L.map('map', {
-                center: [lat, lng],
-                zoom: 15,
-                scrollWheelZoom: false
+                center: [centerLat, centerLng],
+                zoom: 13,
+                scrollWheelZoom: false,
+                touchZoom: true,
+                doubleClickZoom: true
             });
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            // Add marker
-            const marker = L.marker([lat, lng]).addTo(map);
-            marker.bindPopup('<strong>El Alto de los Cinco</strong><br>Villa General Belgrano');
+            // Marker del terreno
+            const markerTerreno = L.marker([terrenoLat, terrenoLng]).addTo(map);
+            markerTerreno.bindPopup('<strong>El Alto de los Cinco</strong><br>Desarrollo de Chacras');
 
             // Enable scroll wheel zoom on click
             map.on('click', function() {
