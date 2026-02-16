@@ -76,14 +76,10 @@
             // Coordenadas de Villa General Belgrano (centro)
             const vgbLat = -31.9770;
             const vgbLng = -64.5660;
-            
-            // Calcular punto medio entre ambas ubicaciones
-            const centerLat = (terrenoLat + vgbLat) / 2;
-            const centerLng = (terrenoLng + vgbLng) / 2;
 
             const map = L.map('map', {
-                center: [centerLat, centerLng],
-                zoom: 13,
+                center: [terrenoLat, terrenoLng],
+                zoom: 12,
                 scrollWheelZoom: false,
                 touchZoom: true,
                 doubleClickZoom: true
