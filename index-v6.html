@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="El Alto de los Cinco - Un desarrollo de chacras exclusivo en Villa General Belgrano. Calidad, naturaleza y seguridad jurídica en tu inversión.">
+    <title>El Alto de los Cinco | Desarrollo de Chacras en Villa General Belgrano</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Comfortaa:wght@300;400;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Fancybox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style-v6.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#hero" class="logo">
+                    <div class="logo-circle">
+                        <span>05</span>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-main">El Alto de los Cinco</span>
+                        <span class="logo-sub">Chacras en las Sierras</span>
+                    </div>
+                </a>
+                <nav class="nav-menu">
+                    <a href="#sobre" class="nav-link">Proyecto</a>
+                    <a href="#ubicacion" class="nav-link">Ubicación</a>
+                    <a href="#mensura" class="nav-link">Seguridad</a>
+                    <a href="#planos" class="nav-link">Planos</a>
+                    <a href="#galeria" class="nav-link">Galería</a>
+                    <a href="#contacto" class="nav-link-cta">Contacto</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="container">
+            <div class="hero-wave"></div>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="bi bi-flower1"></i>
+                    <span>Villa General Belgrano</span>
+                </div>
+                <h1 class="hero-title">El Alto de<br>los Cinco</h1>
+                <p class="hero-text">Un desarrollo de chacras exclusivo donde la naturaleza<br>y el diseño consciente se encuentran</p>
+                <div class="hero-buttons">
+                    <a href="#contacto" class="btn-organic btn-primary">
+                        <span>Conocer más</span>
+                        <i class="bi bi-arrow-down-circle"></i>
+                    </a>
+                    <a href="#galeria" class="btn-organic btn-secondary">
+                        <span>Ver galería</span>
+                        <i class="bi bi-images"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <div class="hero-blob"></div>
+                <img src="assets/images/gallery/view_air_N.jpg" alt="Vista del desarrollo" class="hero-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre el Proyecto -->
+    <section id="sobre" class="section-sobre">
+        <div class="container">
+            <div class="section-intro">
+                <div class="intro-icon">
+                    <i class="bi bi-tree"></i>
+                </div>
+                <h2 class="section-title">Sobre el Proyecto</h2>
+                <p class="section-lead">El Alto de los Cinco nace de la visión de quienes conocen y valoran profundamente este lugar. Creamos un desarrollo de chacras de alto nivel, pensado para el futuro y en armonía con el entorno.</p>
+            </div>
+            
+            <div class="cards-organic">
+                <div class="card-organic">
+                    <div class="card-blob"></div>
+                    <div class="card-icon">
+                        <i class="bi bi-lightbulb-fill"></i>
+                    </div>
+                    <h3 class="card-title">Visión</h3>
+                    <p class="card-text">Integrar naturaleza, calidad y proyección a futuro, generando un entorno que inspire a quienes buscan invertir y vivir en un lugar único.</p>
+                </div>
+                
+                <div class="card-organic">
+                    <div class="card-blob card-blob-alt"></div>
+                    <div class="card-icon">
+                        <i class="bi bi-award-fill"></i>
+                    </div>
+                    <h3 class="card-title">Compromiso</h3>
+                    <p class="card-text">El compromiso con la calidad y el respeto al entorno forma parte integral y formal de la inversión en este desarrollo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ubicación y Entorno -->
+    <section id="ubicacion" class="section-ubicacion">
+        <div class="container">
+            <div class="section-intro">
+                <div class="intro-icon">
+                    <i class="bi bi-geo-alt-fill"></i>
+                </div>
+                <h2 class="section-title">Ubicación y Entorno</h2>
+                <p class="section-lead">Un lugar privilegiado en las Sierras de Córdoba</p>
+            </div>
+            
+            <div class="location-content">
+                <div class="location-text">
+                    <p class="text-large">Ubicado en un lugar privilegiado dentro del ejido de Villa General Belgrano, El Alto de los Cinco ofrece vistas panorámicas, proximidad al río Los Reartes y acceso privado.</p>
+                    
+                    <div class="features-organic">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Localización privilegiada</h4>
+                                <p>En el corazón de Villa General Belgrano</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="bi bi-binoculars-fill"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Vistas panorámicas</h4>
+                                <p>360° de naturaleza y paisajes</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="bi bi-water"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Acceso al río</h4>
+                                <p>Directo al río Los Reartes</p>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="bi bi-signpost-2-fill"></i>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Acceso privado</h4>
+                                <p>Ingreso único desde ruta S210</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="location-map-box">
+                    <div id="map" class="map-container"></div>
+                    <div class="map-info">
+                        <i class="bi bi-pin-map-fill"></i>
+                        <span>A 12 km de Villa General Belgrano</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-organic">
+                <a href="assets/images/gallery/view_N.jpg" data-fancybox="ubicacion" class="gallery-organic-item">
+                    <img src="assets/images/gallery/view_N.jpg" alt="Vista Norte">
+                    <div class="gallery-tag">Norte</div>
+                </a>
+                <a href="assets/images/gallery/view_S.jpg" data-fancybox="ubicacion" class="gallery-organic-item">
+                    <img src="assets/images/gallery/view_S.jpg" alt="Vista Sur">
+                    <div class="gallery-tag">Sur</div>
+                </a>
+                <a href="assets/images/gallery/view_E.jpg" data-fancybox="ubicacion" class="gallery-organic-item">
+                    <img src="assets/images/gallery/view_E.jpg" alt="Vista Este">
+                    <div class="gallery-tag">Este</div>
+                </a>
+                <a href="assets/images/gallery/river.jpg" data-fancybox="ubicacion" class="gallery-organic-item">
+                    <img src="assets/images/gallery/river.jpg" alt="Río">
+                    <div class="gallery-tag">Río</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mensura y Seguridad Jurídica -->
+    <section id="mensura" class="section-mensura">
+        <div class="container">
+            <div class="section-intro">
+                <div class="intro-icon">
+                    <i class="bi bi-shield-fill-check"></i>
+                </div>
+                <h2 class="section-title">Seguridad Jurídica</h2>
+                <p class="section-lead">Todas las chacras cuentan con mensura registrada y situación dominial inscripta</p>
+            </div>
+            
+            <div class="mensura-cards">
+                <div class="mensura-card">
+                    <div class="mensura-icon">
+                        <i class="bi bi-rulers"></i>
+                    </div>
+                    <h3 class="mensura-title">Mensura profesional</h3>
+                    <p class="mensura-text">Mensura real y profesional realizada por agrimensor matriculado. Siendo la base para la definición de superficies, límites, accesos y pendientes del terreno.</p>
+                    <div class="mensura-wave"></div>
+                </div>
+                
+                <div class="mensura-card">
+                    <div class="mensura-icon">
+                        <i class="bi bi-file-earmark-check-fill"></i>
+                    </div>
+                    <h3 class="mensura-title">Títulos de Dominio</h3>
+                    <p class="mensura-text">Todas las chacras cuentan con títulos oficiales inscriptos en el registro de la propiedad. Subdivisiones bajo el régimen de propiedad horizontal especial.</p>
+                    <div class="mensura-wave"></div>
+                </div>
+                
+                <div class="mensura-card">
+                    <div class="mensura-icon">
+                        <i class="bi bi-file-earmark-arrow-down-fill"></i>
+                    </div>
+                    <h3 class="mensura-title">Documentación Digital</h3>
+                    <p class="mensura-text">Información gráfica y técnica del relevamiento incluye pendientes de gota, líneas de relieve y modelos 3D del terreno.</p>
+                    <div class="mensura-wave"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos y Distribución -->
+    <section id="planos" class="section-planos">
+        <div class="container">
+            <div class="section-intro">
+                <div class="intro-icon">
+                    <i class="bi bi-map-fill"></i>
+                </div>
+                <h2 class="section-title">Planos y Distribución</h2>
+                <p class="section-lead">Mapa interactivo con overlays de planos</p>
+            </div>
+            
+            <div class="planos-controls">
+                <div class="controls-group">
+                    <button type="button" class="btn-organic-control active" data-overlay="chacras">Chacras</button>
+                    <button type="button" class="btn-organic-control" data-overlay="subdivisiones">Subdivisiones</button>
+                </div>
+                <div class="controls-divider"></div>
+                <div class="controls-group">
+                    <button type="button" class="btn-organic-control active" data-mapview="lines">Líneas</button>
+                    <button type="button" class="btn-organic-control" data-mapview="transit">Calles</button>
+                    <button type="button" class="btn-organic-control" data-mapview="satellite">Satelital</button>
+                </div>
+            </div>
+            
+            <div class="planos-map-container">
+                <div id="interactive-map"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería -->
+    <section id="galeria" class="section-galeria">
+        <div class="container">
+            <div class="section-intro">
+                <div class="intro-icon">
+                    <i class="bi bi-images"></i>
+                </div>
+                <h2 class="section-title">Galería</h2>
+                <p class="section-lead">Conocé cada rincón del desarrollo</p>
+            </div>
+            
+            <div class="gallery-grid-organic">
+                <a href="assets/images/gallery/view_air_N.jpg" data-fancybox="gallery" class="gallery-item-organic gallery-large">
+                    <img src="assets/images/gallery/view_air_N.jpg" alt="Vista aérea">
+                    <div class="gallery-hover">
+                        <i class="bi bi-zoom-in"></i>
+                    </div>
+                </a>
+                
+                <a href="assets/videos/DJI_20251008091133_0038_D_LRF.mp4" data-fancybox="gallery" data-type="video" class="gallery-item-organic">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/videos/DJI_20251008091133_0038_D_LRF.mp4" type="video/mp4">
+                    </video>
+                    <div class="gallery-hover">
+                        <i class="bi bi-play-circle-fill"></i>
+                    </div>
+                </a>
+                
+                <a href="assets/images/gallery/view_air_SW.jpg" data-fancybox="gallery" class="gallery-item-organic">
+                    <img src="assets/images/gallery/view_air_SW.jpg" alt="Vista SW">
+                    <div class="gallery-hover">
+                        <i class="bi bi-zoom-in"></i>
+                    </div>
+                </a>
+                
+                <a href="assets/images/gallery/view_E.jpg" data-fancybox="gallery" class="gallery-item-organic">
+                    <img src="assets/images/gallery/view_E.jpg" alt="Vista Este">
+                    <div class="gallery-hover">
+                        <i class="bi bi-zoom-in"></i>
+                    </div>
+                </a>
+                
+                <a href="assets/videos/panoramica-campo.mp4" data-fancybox="gallery" data-type="video" class="gallery-item-organic gallery-wide">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/videos/panoramica-campo.mp4" type="video/mp4">
+                    </video>
+                    <div class="gallery-hover">
+                        <i class="bi bi-play-circle-fill"></i>
+                    </div>
+                </a>
+                
+                <a href="assets/images/gallery/view_down_road_entrance.jpg" data-fancybox="gallery" class="gallery-item-organic">
+                    <img src="assets/images/gallery/view_down_road_entrance.jpg" alt="Entrada">
+                    <div class="gallery-hover">
+                        <i class="bi bi-zoom-in"></i>
+                    </div>
+                </a>
+                
+                <a href="assets/images/gallery/terreno_view_S.jpg" data-fancybox="gallery" class="gallery-item-organic">
+                    <img src="assets/images/gallery/terreno_view_S.jpg" alt="Terreno">
+                    <div class="gallery-hover">
+                        <i class="bi bi-zoom-in"></i>
+                    </div>
+                </a>
+                
+                <a href="assets/videos/DJI_20251008091516_0039_D_LRF.mp4" data-fancybox="gallery" data-type="video" class="gallery-item-organic">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/videos/DJI_20251008091516_0039_D_LRF.mp4" type="video/mp4">
+                    </video>
+                    <div class="gallery-hover">
+                        <i class="bi bi-play-circle-fill"></i>
+                    </div>
+                </a>
+                
+                <a href="assets/images/gallery/view_N.jpg" data-fancybox="gallery" class="gallery-item-organic">
+                    <img src="assets/images/gallery/view_N.jpg" alt="Vista Norte">
+                    <div class="gallery-hover">
+                        <i class="bi bi-zoom-in"></i>
+                    </div>
+                </a>
+                
+                <a href="assets/images/gallery/view_S.jpg" data-fancybox="gallery" class="gallery-item-organic">
+                    <img src="assets/images/gallery/view_S.jpg" alt="Vista Sur">
+                    <div class="gallery-hover">
+                        <i class="bi bi-zoom-in"></i>
+                    </div>
+                </a>
+                
+                <a href="assets/images/gallery/view_O.jpg" data-fancybox="gallery" class="gallery-item-organic">
+                    <img src="assets/images/gallery/view_O.jpg" alt="Vista Oeste">
+                    <div class="gallery-hover">
+                        <i class="bi bi-zoom-in"></i>
+                    </div>
+                </a>
+                
+                <a href="assets/images/gallery/river.jpg" data-fancybox="gallery" class="gallery-item-organic gallery-wide">
+                    <img src="assets/images/gallery/river.jpg" alt="Río">
+                    <div class="gallery-hover">
+                        <i class="bi bi-zoom-in"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="section-contacto">
+        <div class="container">
+            <div class="contacto-box">
+                <div class="section-intro">
+                    <div class="intro-icon">
+                        <i class="bi bi-chat-heart-fill"></i>
+                    </div>
+                    <h2 class="section-title">Contacto</h2>
+                    <p class="section-lead">Los invitamos a conocer el lugar. Para coordinar una visita o recibir más información, pueden contactarnos.</p>
+                </div>
+                
+                <div class="contacto-content">
+                    <div class="contact-items">
+                        <div class="contact-item-organic">
+                            <div class="contact-circle">
+                                <i class="bi bi-telephone-fill"></i>
+                            </div>
+                            <div class="contact-info">
+                                <span class="contact-label">Teléfono</span>
+                                <span class="contact-value">+54 9 3547 123456</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item-organic">
+                            <div class="contact-circle">
+                                <i class="bi bi-envelope-fill"></i>
+                            </div>
+                            <div class="contact-info">
+                                <span class="contact-label">Email</span>
+                                <span class="contact-value">contacto@elaltodeloscinco.com.ar</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-actions">
+                        <a href="https://wa.me/5493547123456" target="_blank" class="btn-organic btn-large">
+                            <i class="bi bi-whatsapp"></i>
+                            <span>Contactar por WhatsApp</span>
+                        </a>
+                        <a href="mailto:contacto@elaltodeloscinco.com.ar" class="btn-organic btn-outline">
+                            <i class="bi bi-envelope-fill"></i>
+                            <span>Enviar Email</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-wave"></div>
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="footer-circle">05</div>
+                    <span class="footer-name">El Alto de los Cinco</span>
+                </div>
+                <p class="footer-text">© 2026 Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Fancybox JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="assets/js/main-v2.js"></script>
+
+</body>
+</html>

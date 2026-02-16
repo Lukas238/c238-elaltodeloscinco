@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="El Alto de los Cinco - Un desarrollo de chacras exclusivo en Villa General Belgrano. Calidad, naturaleza y seguridad jurídica en tu inversión.">
+    <title>El Alto de los Cinco | Desarrollo de Chacras en Villa General Belgrano</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts - Helvetica Neue Alternative + Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Fancybox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style-v3.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="container-swiss">
+            <div class="header-grid">
+                <div class="logo">
+                    <span class="logo-number">05</span>
+                    <span class="logo-text">El Alto<br>de los Cinco</span>
+                </div>
+                <nav class="nav-menu">
+                    <a href="#sobre" class="nav-link">01 Proyecto</a>
+                    <a href="#ubicacion" class="nav-link">02 Ubicación</a>
+                    <a href="#mensura" class="nav-link">03 Seguridad</a>
+                    <a href="#planos" class="nav-link">04 Planos</a>
+                    <a href="#galeria" class="nav-link">05 Galería</a>
+                    <a href="#contacto" class="nav-link nav-cta">Contacto</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="container-swiss">
+            <div class="hero-content">
+                <div class="hero-label">Villa General Belgrano</div>
+                <h1 class="hero-title">EL ALTO<br>DE LOS<br>CINCO</h1>
+                <div class="hero-line"></div>
+                <p class="hero-text">Un desarrollo de chacras exclusivo.<br>Calidad, naturaleza y seguridad jurídica.</p>
+                <div class="hero-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Ubicación</span>
+                        <span class="meta-value">31°57'42"S 64°38'25"W</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Superficie</span>
+                        <span class="meta-value">12 hectáreas</span>
+                    </div>
+                </div>
+                <a href="#contacto" class="btn-swiss">Contactar →</a>
+            </div>
+            <div class="hero-image">
+                <img src="assets/images/gallery/view_air_N.jpg" alt="Vista aérea">
+                <div class="image-label">01</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre el Proyecto -->
+    <section id="sobre" class="section-sobre">
+        <div class="container-swiss">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">Sobre el<br>Proyecto</h2>
+            </div>
+            
+            <div class="content-grid">
+                <div class="content-main">
+                    <p class="lead-text">El Alto de los Cinco nace de la visión de quienes conocen y valoran profundamente este lugar. La intención es crear un desarrollo de chacras de alto nivel, pensado para el futuro y en armonía con el entorno.</p>
+                </div>
+                
+                <div class="cards-grid">
+                    <div class="card-swiss">
+                        <div class="card-number">A</div>
+                        <h3 class="card-title">Visión</h3>
+                        <p class="card-text">Integrar naturaleza, calidad y proyección a futuro, generando un entorno que inspire a quienes buscan invertir y vivir en un lugar único.</p>
+                    </div>
+                    <div class="card-swiss">
+                        <div class="card-number">B</div>
+                        <h3 class="card-title">Compromiso</h3>
+                        <p class="card-text">El compromiso con la calidad y el respeto al entorno forma parte integral y formal de la inversión en este desarrollo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ubicación y Entorno -->
+    <section id="ubicacion" class="section-ubicacion">
+        <div class="container-swiss">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">Ubicación<br>y Entorno</h2>
+            </div>
+            
+            <div class="location-grid">
+                <div class="location-text">
+                    <p class="lead-text">Ubicado en un lugar privilegiado dentro del ejido de Villa General Belgrano, El Alto de los Cinco ofrece vistas panorámicas, proximidad al río Los Reartes y acceso privado.</p>
+                    
+                    <ul class="features-list">
+                        <li><span class="feature-mark">—</span> Localización privilegiada</li>
+                        <li><span class="feature-mark">—</span> Vistas panorámicas</li>
+                        <li><span class="feature-mark">—</span> Acceso privado al río Los Reartes</li>
+                        <li><span class="feature-mark">—</span> A 12 km de Villa General Belgrano</li>
+                        <li><span class="feature-mark">—</span> Ingreso privado desde ruta S210</li>
+                    </ul>
+                </div>
+                
+                <div class="location-map">
+                    <div id="map" class="map-container"></div>
+                    <div class="map-label">Coordenadas: 31°57'42"S 64°38'25"W</div>
+                </div>
+            </div>
+            
+            <div class="location-images">
+                <a href="assets/images/gallery/view_N.jpg" data-fancybox="ubicacion" class="location-img">
+                    <img src="assets/images/gallery/view_N.jpg" alt="Vista Norte">
+                    <span class="img-label">N</span>
+                </a>
+                <a href="assets/images/gallery/view_S.jpg" data-fancybox="ubicacion" class="location-img">
+                    <img src="assets/images/gallery/view_S.jpg" alt="Vista Sur">
+                    <span class="img-label">S</span>
+                </a>
+                <a href="assets/images/gallery/view_E.jpg" data-fancybox="ubicacion" class="location-img">
+                    <img src="assets/images/gallery/view_E.jpg" alt="Vista Este">
+                    <span class="img-label">E</span>
+                </a>
+                <a href="assets/images/gallery/river.jpg" data-fancybox="ubicacion" class="location-img">
+                    <img src="assets/images/gallery/river.jpg" alt="Río">
+                    <span class="img-label">RÍO</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mensura y Seguridad Jurídica -->
+    <section id="mensura" class="section-mensura">
+        <div class="container-swiss">
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2 class="section-title">Mensura y<br>Seguridad<br>Jurídica</h2>
+            </div>
+            
+            <p class="section-lead">Todas las chacras se encuentran inscriptas y aprobadas, con mensura registrada y situación dominial inscripta.</p>
+            
+            <div class="mensura-grid">
+                <div class="mensura-card">
+                    <div class="mensura-number">01</div>
+                    <h3 class="mensura-title">Mensura profesional</h3>
+                    <p class="mensura-text">Mensura real y profesional realizada por agrimensor matriculado. Siendo la base para la definición de superficies, límites, accesos y pendientes del terreno.</p>
+                </div>
+                
+                <div class="mensura-card">
+                    <div class="mensura-number">02</div>
+                    <h3 class="mensura-title">Títulos de Dominio</h3>
+                    <p class="mensura-text">Todas las chacras cuentan con títulos oficiales inscriptos en el registro de la propiedad. Subdivisiones bajo el régimen de propiedad horizontal especial.</p>
+                </div>
+                
+                <div class="mensura-card">
+                    <div class="mensura-number">03</div>
+                    <h3 class="mensura-title">Documentación Digital</h3>
+                    <p class="mensura-text">Información gráfica y técnica del relevamiento incluye pendientes de gota, líneas de relieve y modelos 3D del terreno.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Planos y Distribución -->
+    <section id="planos" class="section-planos">
+        <div class="container-swiss">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title">Planos y<br>Distribución</h2>
+            </div>
+            
+            <p class="section-lead">Mapa interactivo con overlays de planos.</p>
+            
+            <div class="planos-controls">
+                <button type="button" class="btn-control active" data-overlay="chacras">Chacras</button>
+                <button type="button" class="btn-control" data-overlay="subdivisiones">Subdivisiones</button>
+                <div class="divider"></div>
+                <button type="button" class="btn-control active" data-mapview="lines">Líneas</button>
+                <button type="button" class="btn-control" data-mapview="transit">Calles</button>
+                <button type="button" class="btn-control" data-mapview="satellite">Satelital</button>
+            </div>
+            
+            <div class="planos-map">
+                <div id="interactive-map"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería -->
+    <section id="galeria" class="section-galeria">
+        <div class="container-swiss">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2 class="section-title">Galería</h2>
+            </div>
+            
+            <div class="gallery-grid">
+                <a href="assets/images/gallery/view_air_N.jpg" data-fancybox="gallery" class="gallery-item gallery-large">
+                    <img src="assets/images/gallery/view_air_N.jpg" alt="Vista aérea Norte">
+                    <span class="gallery-label">01</span>
+                </a>
+                
+                <a href="assets/videos/DJI_20251008091133_0038_D_LRF.mp4" data-fancybox="gallery" data-type="video" class="gallery-item gallery-video">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/videos/DJI_20251008091133_0038_D_LRF.mp4" type="video/mp4">
+                    </video>
+                    <span class="gallery-label">VIDEO</span>
+                </a>
+                
+                <a href="assets/images/gallery/view_air_SW.jpg" data-fancybox="gallery" class="gallery-item">
+                    <img src="assets/images/gallery/view_air_SW.jpg" alt="Vista aérea SW">
+                    <span class="gallery-label">02</span>
+                </a>
+                
+                <a href="assets/images/gallery/view_E.jpg" data-fancybox="gallery" class="gallery-item">
+                    <img src="assets/images/gallery/view_E.jpg" alt="Vista Este">
+                    <span class="gallery-label">03</span>
+                </a>
+                
+                <a href="assets/videos/panoramica-campo.mp4" data-fancybox="gallery" data-type="video" class="gallery-item gallery-wide gallery-video">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/videos/panoramica-campo.mp4" type="video/mp4">
+                    </video>
+                    <span class="gallery-label">PANORAMA</span>
+                </a>
+                
+                <a href="assets/images/gallery/view_down_road_entrance.jpg" data-fancybox="gallery" class="gallery-item">
+                    <img src="assets/images/gallery/view_down_road_entrance.jpg" alt="Entrada">
+                    <span class="gallery-label">04</span>
+                </a>
+                
+                <a href="assets/images/gallery/terreno_view_S.jpg" data-fancybox="gallery" class="gallery-item">
+                    <img src="assets/images/gallery/terreno_view_S.jpg" alt="Terreno">
+                    <span class="gallery-label">05</span>
+                </a>
+                
+                <a href="assets/videos/DJI_20251008091516_0039_D_LRF.mp4" data-fancybox="gallery" data-type="video" class="gallery-item gallery-video">
+                    <video autoplay loop muted playsinline>
+                        <source src="assets/videos/DJI_20251008091516_0039_D_LRF.mp4" type="video/mp4">
+                    </video>
+                    <span class="gallery-label">VIDEO</span>
+                </a>
+                
+                <a href="assets/images/gallery/view_N.jpg" data-fancybox="gallery" class="gallery-item">
+                    <img src="assets/images/gallery/view_N.jpg" alt="Vista Norte">
+                    <span class="gallery-label">06</span>
+                </a>
+                
+                <a href="assets/images/gallery/view_S.jpg" data-fancybox="gallery" class="gallery-item">
+                    <img src="assets/images/gallery/view_S.jpg" alt="Vista Sur">
+                    <span class="gallery-label">07</span>
+                </a>
+                
+                <a href="assets/images/gallery/view_O.jpg" data-fancybox="gallery" class="gallery-item">
+                    <img src="assets/images/gallery/view_O.jpg" alt="Vista Oeste">
+                    <span class="gallery-label">08</span>
+                </a>
+                
+                <a href="assets/images/gallery/river.jpg" data-fancybox="gallery" class="gallery-item gallery-wide">
+                    <img src="assets/images/gallery/river.jpg" alt="Río">
+                    <span class="gallery-label">RÍO</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="section-contacto">
+        <div class="container-swiss">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2 class="section-title">Contacto</h2>
+            </div>
+            
+            <div class="contacto-content">
+                <p class="contacto-text">Los invitamos a conocer el lugar. Para coordinar una visita o recibir más información, pueden contactarnos.</p>
+                
+                <div class="contacto-info">
+                    <div class="info-item">
+                        <span class="info-label">Teléfono</span>
+                        <span class="info-value">+54 9 3547 123456</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Email</span>
+                        <span class="info-value">contacto@elaltodeloscinco.com.ar</span>
+                    </div>
+                </div>
+                
+                <div class="contacto-actions">
+                    <a href="https://wa.me/5493547123456" target="_blank" class="btn-swiss">WhatsApp →</a>
+                    <a href="mailto:contacto@elaltodeloscinco.com.ar" class="btn-swiss btn-outline">Email →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container-swiss">
+            <div class="footer-line"></div>
+            <div class="footer-content">
+                <p class="footer-text">© 2026 El Alto de los Cinco</p>
+                <p class="footer-coordinates">31°57'42"S 64°38'25"W</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Fancybox JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="assets/js/main-v2.js"></script>
+
+</body>
+</html>
