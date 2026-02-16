@@ -113,6 +113,7 @@
     let satelliteLayer = null;
     let whiteLayer = null;
     let centerMarker = null;
+    let currentMapView = 'lines'; // Track current map view: 'lines', 'transit', or 'satellite'
 
     function initInteractiveMap() {
         const mapContainer = document.getElementById('interactive-map');
@@ -361,11 +362,9 @@
                 activeOverlay = overlaySubdivisiones;
             }
             
-            // Determinar el color según la vista activa
+            // Determinar el color según la vista activa registrada
             if (activeOverlay) {
-                const isSatelliteView = interactiveMapInstance.hasLayer(satelliteLayer);
-                const isTransitView = interactiveMapInstance.hasLayer(transitLayer);
-                const colorClass = (isSatelliteView || isTransitView) ? 'overlay-white' : 'overlay-black';
+                const colorClass = (currentMapView === 'satellite') ? 'overlay-white' : 'overlay-black';
                 
                 // Aplicar color correcto después de que el overlay esté en el mapa
                 setTimeout(() => {
@@ -414,6 +413,9 @@
         // Event handlers para botones de vista de mapa
         $('[data-mapview]').on('click', function() {
             const viewType = $(this).data('mapview');
+            
+            // Actualizar la variable de vista activa
+            currentMapView = viewType;
             
             // Determinar qué overlay está activo
             const activeOverlay = interactiveMapInstance.hasLayer(overlayChacras) ? overlayChacras : 
