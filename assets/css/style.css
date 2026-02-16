@@ -422,6 +422,10 @@ section {
     color: var(--primary);
 }
 
+.card-icon i {
+    color: var(--primary);
+}
+
 .card-sobre .card-title {
     font-size: 1.5rem;
     font-weight: 600;
@@ -454,7 +458,7 @@ section {
 }
 
 .features-list li::before {
-    content: '✓';
+    font-family: 'bootstrap-icons';
     position: absolute;
     left: 0;
     top: 50%;
@@ -462,6 +466,26 @@ section {
     color: var(--primary);
     font-weight: bold;
     font-size: 1.2rem;
+}
+
+.features-list li[data-icon="geo-alt-fill"]::before {
+    content: "\F3CE";
+}
+
+.features-list li[data-icon="binoculars-fill"]::before {
+    content: "\F1B2";
+}
+
+.features-list li[data-icon="water"]::before {
+    content: "\F7F0";
+}
+
+.features-list li[data-icon="signpost-2-fill"]::before {
+    content: "\F66D";
+}
+
+.features-list li[data-icon="arrow-right-circle-fill"]::before {
+    content: "\F132";
 }
 
 .map-container {
