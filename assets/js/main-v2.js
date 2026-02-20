@@ -528,11 +528,14 @@
                     autoplay: true,
                     controls: true,
                     muted: false,
-                    playsInline: true
+                    playsInline: true,
+                    video: {
+                        controls: true,
+                        autoplay: true
+                    }
                 },
                 Video: {
-                    autoplay: true,
-                    ratio: 16/9
+                    autoplay: true
                 },
                 Carousel: {
                     infinite: true,
