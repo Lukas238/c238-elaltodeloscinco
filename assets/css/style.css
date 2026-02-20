@@ -1400,44 +1400,57 @@ section {
    Fancybox Panning Effects
    ============================================ */
 
-/* Keyframes for Fancybox panning */
+/* Keyframes for Fancybox panning - with larger scale to prevent edge gaps */
 @keyframes fancyboxPanLeftRight {
     0% {
-        transform: scale(1.2) translateX(-5%);
+        transform: scale(1.3) translateX(-3%);
     }
     50% {
-        transform: scale(1.2) translateX(5%);
+        transform: scale(1.3) translateX(3%);
     }
     100% {
-        transform: scale(1.2) translateX(-5%);
+        transform: scale(1.3) translateX(-3%);
     }
 }
 
 @keyframes fancyboxPanRightLeft {
     0% {
-        transform: scale(1.2) translateX(5%);
+        transform: scale(1.3) translateX(3%);
     }
     50% {
-        transform: scale(1.2) translateX(-5%);
+        transform: scale(1.3) translateX(-3%);
     }
     100% {
-        transform: scale(1.2) translateX(5%);
+        transform: scale(1.3) translateX(3%);
     }
 }
 
-/* Apply panning to all images in Fancybox */
+/* Default: images should fit and maintain aspect ratio without panning */
 .fancybox__slide img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+    object-position: center;
+}
+
+/* Apply panning only to wide/panoramic images */
+.fancybox__slide img[src*="view_E"],
+.fancybox__slide img[src*="panoram"] {
+    object-fit: cover;
     animation: fancyboxPanLeftRight 25s ease-in-out infinite;
 }
 
-/* Alternate panning direction for odd slides */
-.fancybox__slide:nth-child(odd) img {
+/* Alternate panning direction for specific panoramic images */
+.fancybox__slide:nth-child(odd) img[src*="view_E"],
+.fancybox__slide:nth-child(odd) img[src*="panoram"] {
     animation: fancyboxPanRightLeft 25s ease-in-out infinite;
 }
 
-/* Ensure the container allows overflow for the panning effect */
+/* Ensure the container fills viewport */
 .fancybox__content {
     overflow: hidden;
+    width: 100% !important;
+    height: 100% !important;
 }
 
 /* Prevent images from overflowing during pan animation */
