@@ -1098,6 +1098,26 @@ section {
 .btn-whatsapp-v2 {
     background-color: #25D366;
     color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-whatsapp-v2::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-whatsapp-v2:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 .btn-whatsapp-v2:hover {
@@ -1105,6 +1125,12 @@ section {
     color: var(--white);
     transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
+}
+
+.btn-whatsapp-v2 svg,
+.btn-whatsapp-v2 span {
+    position: relative;
+    z-index: 1;
 }
 
 .btn-email-v2 {
