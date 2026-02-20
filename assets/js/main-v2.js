@@ -560,6 +560,43 @@
                     }
                 }
             });
+            
+            // Bind ubicacion gallery with same settings
+            Fancybox.bind('[data-fancybox="ubicacion"]', {
+                groupAll: true,
+                Toolbar: {
+                    display: {
+                        left: ['infobar'],
+                        middle: [],
+                        right: ['slideshow', 'thumbs', 'close']
+                    }
+                },
+                Thumbs: {
+                    type: 'classic',
+                    autoStart: false
+                },
+                Images: {
+                    protected: true,
+                    zoom: true
+                },
+                Carousel: {
+                    infinite: true,
+                    transition: 'slide'
+                },
+                on: {
+                    reveal: (fancybox, slide) => {
+                        // Force layout recalculation when slide is revealed
+                        if (slide.type === 'image') {
+                            const img = slide.$el.querySelector('img');
+                            if (img && !img.complete) {
+                                img.addEventListener('load', () => {
+                                    fancybox.update();
+                                }, { once: true });
+                            }
+                        }
+                    }
+                }
+            });
         }
     }
 
