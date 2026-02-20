@@ -1,0 +1,25 @@
+# Jekyll Configuration
+title: "El Alto de los Cinco"
+description: "Desarrollo de Chacras en Villa General Belgrano"
+baseurl: ""
+url: "https://elaltodeloscinco.com.ar"
+
+# Build settings
+markdown: kramdown
+
+# Exclude from build
+exclude:
+  - backup/
+  - docs/
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - .gitignore
+  - .git/
+  - .DS_Store
+  - node_modules/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag

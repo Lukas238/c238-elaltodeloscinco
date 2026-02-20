@@ -1,26 +1,44 @@
 # El Alto de los Cinco - Sitio Web
 
-Sitio web estático para promocionar el desarrollo de chacras "El Alto de los Cinco" en Villa General Belgrano, Córdoba.
+Sitio web estático con Jekyll para promocionar el desarrollo de chacras "El Alto de los Cinco" en Villa General Belgrano, Córdoba.
 
 ## 🚀 Estructura del Proyecto
 
 ```
 /
-├── index.html              # Página principal (versión v2_2)
+├── index.html                    # Landing "Próximamente" (pública)
+├── ac7f92b3e5d8/
+│   └── index.html               # Sitio real completo (URL tokenizada)
+├── _config.yml                   # Configuración Jekyll
+├── _layouts/
+│   └── default.html             # Layout base
+├── Gemfile                       # Dependencias Ruby/Jekyll
 ├── assets/
 │   ├── css/
-│   │   └── style.css      # Estilos principales
+│   │   └── style.css            # Estilos principales
 │   ├── js/
-│   │   └── main-v2.js     # JavaScript principal
-│   ├── images/            # Imágenes y recursos visuales
-│   └── videos/            # Videos promocionales
-├── docs/                  # Documentación del proyecto
-└── backup/                # Versiones anteriores y wireframes
+│   │   └── main-v2.js           # JavaScript principal
+│   ├── images/                  # Imágenes y recursos visuales
+│   └── videos/                  # Videos promocionales
+├── docs/                        # Documentación del proyecto
+└── backup/                      # Versiones anteriores
 ```
+
+## 🔒 Acceso al Sitio
+
+- **Landing pública:** `https://elaltodeloscinco.com.ar/`
+- **Sitio completo (tokenizado):** `https://elaltodeloscinco.com.ar/ac7f92b3e5d8/`
+
+El sitio real está oculto bajo una URL tokenizada, accesible solo con el link completo.
 
 ## 📦 Deployment
 
-Este sitio está listo para deployar en GitHub Pages u otro hosting estático.
+### Desarrollo local
+
+1. **Instalar dependencias:**
+   ```bash
+   bundle install
+   ```
 
 2. **Ejecutar servidor de desarrollo:**
    ```bash
@@ -29,14 +47,22 @@ Este sitio está listo para deployar en GitHub Pages u otro hosting estático.
 
 3. **Abrir en navegador:**
    ```
-   http://localhost:4000
+   http://localhost:4000              # Landing "Próximamente"
+   http://localhost:4000/ac7f92b3e5d8/  # Sitio completo
    ```
 
-4. **Build para producción:**
-   ```bash
-   bundle exec jekyll build
-   ```
-   Los archivos generados estarán en `_site/`
+### Build para producción
+
+```bash
+bundle exec jekyll build
+```
+Los archivos generados estarán en `_site/`
+
+### GitHub Pages
+
+El sitio está configurado para funcionar automáticamente con GitHub Pages. Solo necesitas:
+1. Push a la rama `main`
+2. Configurar GitHub Pages para usar la rama `main` y carpeta raíz `/`
 
 ## 📁 Estructura del Proyecto
 

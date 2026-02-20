@@ -136,8 +136,8 @@
         
         // Rutas de las imágenes overlay
         const OVERLAYS = {
-            chacras: 'assets/images/planos/plano__chacras.png',
-            subdivisiones: 'assets/images/planos/plano__subdivisiones.png'
+            chacras: '/assets/images/planos/plano__chacras.png',
+            subdivisiones: '/assets/images/planos/plano__subdivisiones.png'
         };
         
         // Crear el mapa
