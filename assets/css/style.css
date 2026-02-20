@@ -1425,25 +1425,30 @@ section {
     }
 }
 
-/* Default: images should fit and maintain aspect ratio without panning */
+/* All images should have panning by default with cover */
 .fancybox__slide img {
     width: 100% !important;
     height: 100% !important;
-    object-fit: contain;
-    object-position: center;
-}
-
-/* Apply panning only to wide/panoramic images */
-.fancybox__slide img[src*="view_E"],
-.fancybox__slide img[src*="panoram"] {
     object-fit: cover;
+    object-position: center;
     animation: fancyboxPanLeftRight 25s ease-in-out infinite;
 }
 
-/* Alternate panning direction for specific panoramic images */
-.fancybox__slide:nth-child(odd) img[src*="view_E"],
-.fancybox__slide:nth-child(odd) img[src*="panoram"] {
+/* Alternate panning direction for odd slides */
+.fancybox__slide:nth-child(odd) img {
     animation: fancyboxPanRightLeft 25s ease-in-out infinite;
+}
+
+/* Exception: Plano cenital (terreno-main.jpg) should not pan */
+.fancybox__slide img[src*="terreno-main"] {
+    object-fit: contain;
+    animation: none !important;
+}
+
+/* Ensure captions are always visible above content */
+.fancybox__caption {
+    z-index: 9999 !important;
+    pointer-events: none;
 }
 
 /* Ensure the container fills viewport */
