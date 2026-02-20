@@ -1428,7 +1428,7 @@ section {
 /* All images should have panning by default with cover */
 .fancybox__slide img {
     width: 100% !important;
-    height: 100% !important;
+    height: 100%;
     object-fit: cover;
     object-position: center;
     animation: fancyboxPanLeftRight 25s ease-in-out infinite;
@@ -1451,11 +1451,11 @@ section {
     pointer-events: none;
 }
 
-/* Ensure the container fills viewport */
+/* Ensure the container fills viewport but respects caption space */
 .fancybox__content {
     overflow: hidden;
     width: 100% !important;
-    height: 100% !important;
+    height: 100%;
 }
 
 /* Prevent images from overflowing during pan animation */
@@ -1473,8 +1473,6 @@ section {
 .fancybox__slide.has-html5video .fancybox__content {
     width: 100% !important;
     height: 100% !important;
-    max-width: 100%;
-    max-height: 100%;
 }
 
 /* Video element should fill the container */

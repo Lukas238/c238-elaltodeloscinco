@@ -546,6 +546,17 @@
                     ready: (fancybox) => {
                         // Ensure panning animations are applied
                         console.log('Fancybox gallery ready');
+                    },
+                    reveal: (fancybox, slide) => {
+                        // Force layout recalculation when slide is revealed
+                        if (slide.type === 'image') {
+                            const img = slide.$el.querySelector('img');
+                            if (img && !img.complete) {
+                                img.addEventListener('load', () => {
+                                    fancybox.update();
+                                }, { once: true });
+                            }
+                        }
                     }
                 }
             });
