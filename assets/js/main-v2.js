@@ -524,6 +524,12 @@
                     protected: true,
                     zoom: true
                 },
+                Html5video: {
+                    autoplay: true,
+                    controls: true,
+                    muted: false,
+                    playsInline: true
+                },
                 Video: {
                     autoplay: true,
                     ratio: 16/9
