@@ -1145,6 +1145,60 @@ section {
     box-shadow: var(--shadow-lg);
 }
 
+/* QR Code Section */
+.qr-code-container {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-xl);
+    background-color: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.qr-code-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin: 0;
+    text-align: center;
+}
+
+.qr-code-wrapper {
+    width: 220px;
+    height: 220px;
+    padding: var(--spacing-md);
+    background-color: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.qr-code-wrapper:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+.qr-code-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.qr-code-subtitle {
+    font-size: 0.95rem;
+    color: var(--gray-600);
+    margin: 0;
+    text-align: center;
+}
+
 /* ============================================
    Footer
    ============================================ */
@@ -1335,6 +1389,20 @@ section {
         width: 100%;
     }
     
+    .qr-code-container {
+        margin-top: var(--spacing-lg);
+        padding: var(--spacing-lg);
+    }
+    
+    .qr-code-wrapper {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .qr-code-title {
+        font-size: 1.25rem;
+    }
+    
     .floating-contact {
         bottom: 20px;
         right: 20px;
@@ -1467,6 +1535,15 @@ section {
 
 /* Exception: Plano cenital (terreno-main.jpg) should not pan */
 .fancybox__slide img[src*="terreno-main"] {
+    object-fit: contain;
+    animation: none !important;
+}
+
+/* Exception: Portrait images and río photos should not pan */
+.fancybox__slide img[src*="rio_los_reartes"] {
+    width: auto !important;
+    max-width: 100%;
+    height: 100%;
     object-fit: contain;
     animation: none !important;
 }
