@@ -6,6 +6,16 @@
     'use strict';
 
     // ============================================
+    // Google Analytics Helper Function
+    // ============================================
+    function trackEvent(eventName, eventParams) {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', eventName, eventParams);
+            console.log('GA Event:', eventName, eventParams);
+        }
+    }
+
+    // ============================================
     // Document Ready
     // ============================================
     $(document).ready(function() {
@@ -22,6 +32,7 @@
         initSmoothScroll();
         initMobileMenu();
         initScrollAnimations();
+        initWhatsAppTracking();
     });
 
     // ============================================
@@ -96,6 +107,11 @@
             // Enable scroll wheel zoom on click
             map.on('click', function() {
                 map.scrollWheelZoom.enable();
+                // Track map interaction
+                trackEvent('map_interaction', {
+                    event_category: 'Ubicacion',
+                    event_label: 'Click en Mapa de Ubicación'
+                });
             });
 
             map.on('mouseout', function() {
@@ -362,6 +378,12 @@
             const overlayType = $(this).data('overlay');
             const isCurrentlyActive = $(this).hasClass('active');
             
+            // Track planos interaction
+            trackEvent('planos_interaction', {
+                event_category: 'Planos',
+                event_label: 'Toggle Overlay - ' + overlayType
+            });
+            
             // Remover todos los overlays (resetear opacity para próxima vez)
             if (interactiveMapInstance.hasLayer(overlayChacras)) {
                 overlayChacras.setOpacity(0);
@@ -433,6 +455,12 @@
         // Event handlers para botones de vista de mapa
         $('[data-mapview]').on('click', function() {
             const viewType = $(this).data('mapview');
+            
+            // Track map view change
+            trackEvent('planos_view_change', {
+                event_category: 'Planos',
+                event_label: 'Cambio de Vista - ' + viewType
+            });
             
             // Actualizar la variable de vista activa
             currentMapView = viewType;
@@ -548,6 +576,25 @@
                         console.log('Fancybox gallery ready');
                     },
                     reveal: (fancybox, slide) => {
+                        // Track gallery interaction with detailed info
+                        const mediaType = slide.type === 'html5video' ? 'video' : 'imagen';
+                        const caption = slide.caption || 'Sin título';
+                        const imageUrl = slide.src || '';
+                        const fileName = imageUrl.split('/').pop() || 'unknown';
+                        const slideIndex = slide.index + 1; // 1-based index
+                        const totalSlides = fancybox.items.length;
+                        
+                        trackEvent('gallery_view', {
+                            event_category: 'Galeria',
+                            event_label: fileName,
+                            media_type: mediaType,
+                            caption: caption,
+                            image_url: imageUrl,
+                            slide_number: slideIndex,
+                            total_slides: totalSlides,
+                            slide_position: slideIndex + ' de ' + totalSlides
+                        });
+                        
                         // Force layout recalculation when slide is revealed
                         if (slide.type === 'image') {
                             const img = slide.$el.querySelector('img');
@@ -757,6 +804,34 @@
             $('.mobile-menu-toggle').removeClass('active');
             $('.nav-menu').removeClass('active');
         }
+    }
+
+    // ============================================
+    // WhatsApp Click Tracking
+    // ============================================
+    function initWhatsAppTracking() {
+        // Track all WhatsApp links
+        $('a[href*="wa.me"], a[href*="whatsapp"], .btn-whatsapp, .btn-whatsapp-v2').on('click', function(e) {
+            const buttonText = $(this).text().trim() || 'WhatsApp Button';
+            const buttonLocation = $(this).closest('section').attr('id') || 'unknown';
+            
+            trackEvent('whatsapp_click', {
+                event_category: 'Contacto',
+                event_label: 'Click WhatsApp - ' + buttonLocation,
+                button_text: buttonText,
+                section: buttonLocation
+            });
+        });
+        
+        // Track floating contact button specifically
+        $('#floatingContact').on('click', function(e) {
+            trackEvent('whatsapp_click', {
+                event_category: 'Contacto',
+                event_label: 'Click WhatsApp - Botón Flotante',
+                button_text: 'Floating Contact',
+                section: 'floating'
+            });
+        });
     }
 
 })(jQuery);
